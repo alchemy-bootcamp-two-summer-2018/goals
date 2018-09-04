@@ -12,13 +12,13 @@ Change your build setup:
 
 The App should offer the following routes:
 
-* `/` (home) - Landing page with link to signup
+* `/` (home) - Landing page with enticement like "sign up now" that links to /auth
 * `/auth` - Sign Up/In
 * `/goals`
     * List of users own goals
         * User can mark goal complete
     * Form to add a new goal
-* `/users` (home) - List of all users adn their goals (BONUS: with goals complete and total goals)
+* `/users` - List of all users and their goals (BONUS: with goals complete and total goals)
 
 Also include a header with Navigation links to other routes
 
