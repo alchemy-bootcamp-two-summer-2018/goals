@@ -8,16 +8,16 @@ client.query(`
     password VARCHAR(256) NOT NULL
   );
 
+  CREATE TABLE IF NOT EXISTS statuses (
+    id SERIAL PRIMARY KEY,
+    status VARCHAR(256)
+  );
+
   CREATE TABLE IF NOT EXISTS goals (
     id SERIAL PRIMARY KEY,
     goal VARCHAR(1000),
     status_id INTEGER NOT NULL REFERENCES statuses(id),
     user_id INTEGER NOT NULL REFERENCES users(id)
-  );
-
-  CREATE TABLE IF NOT EXISTS statuses (
-    id SERIAL PRIMARY KEY,
-    status VARCHAR(256)
   );
 `)
   .then(

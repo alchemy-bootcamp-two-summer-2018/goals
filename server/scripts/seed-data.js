@@ -1,6 +1,6 @@
 require('dotenv').config();
 const client = require('../db-client');
-const statuses = require('.statuses.json');
+const statuses = require('./statuses.json');
 
 Promise.all(
   statuses.map(status => {
