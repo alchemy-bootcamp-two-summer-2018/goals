@@ -1,5 +1,5 @@
 const URL = '/api';
-const GOALS_URL = `${URL}/goals`;
+const BACON_URL = `${URL}/goals`;
 
 
 export default {
