@@ -50,3 +50,35 @@ app.post('/api/auth/signup', (req, res) => {
         });
     });
 });
+
+app.post('/api/auth/signin', (req, res) => {
+  const body = req.body;
+  const email = body.email;
+  const password = body.password;
+
+  if(!email || !password) {
+    res.status(400).send({
+      error: 'email and password are required'
+    });
+    return;
+  }
+
+  client.query(`
+    select id, email, password
+    from users
+    where email = $1
+  `,
+  [email])
+    .then(results => {
+      const row = results.rows[0];
+      if(!row || row.password !== password) {
+        res.status(401).send({ error: 'invalid email or password' });
+        return;
+      }
+      res.send({
+        id: row.id,
+        email: row.email
+      });
+    });
+});
+
