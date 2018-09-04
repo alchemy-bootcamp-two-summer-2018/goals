@@ -18,15 +18,32 @@
       <span v-if="user">user: {{ user.email }}</span>
     </header>
 
-    <RouterView/>
+    <router-view :onUser="handleUser"></router-view>
   </div>
 </template>
 
 <script>
-
+import { checkForToken, signOut } from './services/api.js';
 
 export default {
-  
+  data() {
+    return {
+      user: null
+    };
+  },
+  created() {
+    this.user = checkForToken();
+  },
+  methods: {
+    handleUser(user) {
+      this.user = user;
+    },
+    handleSignOut() {
+      signOut();
+      this.user = null;
+      this.$router.push('/');
+    }
+  }
 };
 
 </script>
