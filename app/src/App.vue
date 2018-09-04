@@ -2,8 +2,11 @@
   <div id="app">
     <Header/>
     <nav>
-      <router-link to="/">Home</router-link>
+      <RouterLink class="nav-link" to="/">Home</RouterLink>
+      <RouterLink class="nav-link" to="/auth">Sign In</RouterLink>
+      <RouterLink class="nav-link" to="/goals">Goals</RouterLink>
     </nav>
+    <RouterView></RouterView>
   </div>
 </template>
 
@@ -27,5 +30,9 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+.nav-link {
+  padding: 50px;
 }
 </style>
