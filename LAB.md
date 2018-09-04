@@ -2,6 +2,12 @@
 
 Create a fullstack vue/postgres app that allows users to track their goals.
 
+## Build
+
+Change your build setup:
+* Use the proxy feature from the Vue dev server to the backend express server
+* Change `services/api.js` to not use server name (`/api`, not `http://localhost:8080/api`)
+
 ## App
 
 The App should offer the following routes:
