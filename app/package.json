@@ -6,6 +6,8 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
+    "copy": "rm -rf ../server/public && cp -R ./dist ../server/public",
+    "build:server": "npm run build && npm run copy",
     "pretest": "npm run lint",
     "test": "exit 0",
     "start": "npm run serve"
