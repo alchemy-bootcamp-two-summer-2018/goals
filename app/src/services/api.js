@@ -63,3 +63,10 @@ export function checkForToken() {
   token = user.id;
   return user;
 }
+
+export function getGoals() {
+  return fetch(`${URL}/goals`, {
+    headers: getHeaders()
+  })
+    .then(responseHandler);
+}
