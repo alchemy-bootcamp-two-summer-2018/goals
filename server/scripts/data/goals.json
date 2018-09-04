@@ -1,29 +1,22 @@
 [
   {
-    "name": "California",
-    "abbrev": "CA",
-    "motto": "Eureka",
-    "capitol": "Sacramento",
-    "demonym": "Californian",
-    "governor": "Jerry Brown",
-    "landlocked": false    
+    "user_id": 1,
+    "is_completed": false,
+    "description": "Do the thing"
   },
   {
-    "name": "Oregon",
-    "abbrev": "OR",
-    "motto": "Alis volat propriis",
-    "capitol": "Salem",
-    "demonym": "Oregonian",
-    "governor": "Kate Brown",
-    "landlocked": false
+    "user_id": 1,
+    "is_completed": false,
+    "description": "Do 2nd thing"
   },
   {
-    "name": "Colorado",
-    "abbrev": "CO",
-    "motto": "Nil sine numine",
-    "capitol": "Denver",
-    "demonym": "Coloradan",
-    "governor": "John Hickenlooper",
-    "landlocked": true
+    "user_id": 2,
+    "is_completed": true,
+    "description": "Do that thing I already did"
+  },
+  {
+    "user_id": 2,
+    "is_completed": false,
+    "description": "Do the thing (#4)"
   }
 ]
