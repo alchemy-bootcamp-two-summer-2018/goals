@@ -3,7 +3,7 @@ require('dotenv').config();
 const express = require('express');
 const app = express();
 
-const request = require('superagent');
+// const request = require('superagent');
 
 const cors = require('cors');
 const morgan = require('morgan');
@@ -82,3 +82,18 @@ app.post('/api/auth/signin', (req, res) => {
     });
 });
 
+app.use((req, res, next) => {
+  const id = req.get('Authorization');
+  if(!id) {
+    res.status(403).send({
+      error: 'No token found'
+    });
+    return;
+  }
+
+  req.userId = id;
+  next();
+});
+
+const PORT = process.env.PORT;
+app.listen(PORT, () => console.log('server running on port', PORT));
