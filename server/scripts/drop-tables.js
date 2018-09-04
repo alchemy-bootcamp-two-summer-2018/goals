@@ -2,9 +2,7 @@ require('dotenv').config();
 const client = require('../db-client');
 
 client.query(`
-  DROP TABLE IF EXISTS restaurants;
-  DROP TABLE IF EXISTS neighborhoods;
-  DROP TABLE IF EXISTS quadrants;
+  DROP TABLE IF EXISTS goals;
   DROP TABLE IF EXISTS users;
 `)
   .then(
