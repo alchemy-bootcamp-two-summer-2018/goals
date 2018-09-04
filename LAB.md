@@ -12,7 +12,7 @@ The App should offer the following routes:
     * List of users own goals
         * User can mark goal complete
     * Form to add a new goal
-* `/users` (home) - List of all users (BONUS: with goals complete and total goals)
+* `/users` (home) - List of all users adn their goals (BONUS: with goals complete and total goals)
 
 Also include a header with Navigation links to other routes
 
