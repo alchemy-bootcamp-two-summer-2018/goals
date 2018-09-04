@@ -1,35 +1,33 @@
 require('dotenv').config();
 const client = require('../db-client');
-const quadrants = require('./quadrants.json');
-// const neighborhoods = require('./neighborhoods.json');
+const users = require('./data/users.json');
+const goals = require('./data/goals.json');
 
 Promise.all(
-  quadrants.map(quadrant => {
+  users.map(user => {
     return client.query(`
-        INSERT INTO quadrants (name, direction)
+        INSERT INTO users (email, password)
         VALUES ($1, $2);
     `,
-    [quadrant.name, quadrant.direction]
+    [user.email, user.password]
     ).then(result => result.rows[0]);
   })
 )
   .then(() => {
-    // return Promise.all(
-    //   neighborhoods.map(n => {
-    //     return client.query(`
-    //         INSERT INTO neighborhoods (
-    //           name, 
-    //           quadrant_id, 
-    //           population, 
-    //           founded, 
-    //           description
-    //         )
-    //         VALUES ($1, $2, $3, $4, $5, $6);
-    //     `,
-    //     [n.name, n.quadrant_id, n.population, n.founded, n.description]
-    //     ).then(result => result.rows[0]);
-    //   })
-    // );
+    return Promise.all(
+      goals.map(goal => {
+        return client.query(`
+            INSERT INTO goals (
+              user_id, 
+              is_completed,
+              description
+            )
+            VALUES ($1, $2, $3);
+        `,
+        [goal.user_id, goal.is_completed, goal.description]
+        ).then(result => result.rows[0]);
+      })
+    );
   })
   .then(
     () => console.log('seed data load successful'),
