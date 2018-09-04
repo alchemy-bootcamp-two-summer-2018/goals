@@ -1,0 +1,29 @@
+[
+  {
+    "name": "California",
+    "abbrev": "CA",
+    "motto": "Eureka",
+    "capitol": "Sacramento",
+    "demonym": "Californian",
+    "governor": "Jerry Brown",
+    "landlocked": false    
+  },
+  {
+    "name": "Oregon",
+    "abbrev": "OR",
+    "motto": "Alis volat propriis",
+    "capitol": "Salem",
+    "demonym": "Oregonian",
+    "governor": "Kate Brown",
+    "landlocked": false
+  },
+  {
+    "name": "Colorado",
+    "abbrev": "CO",
+    "motto": "Nil sine numine",
+    "capitol": "Denver",
+    "demonym": "Coloradan",
+    "governor": "John Hickenlooper",
+    "landlocked": true
+  }
+]

@@ -1,0 +1,38 @@
+[
+  {
+    "name": "Sacramento",
+    "population": 501901,
+    "landlocked": true,
+    "state": "CA"
+  },
+  {
+    "name": "Los Angeles",
+    "population": 3976000,
+    "landlocked": false,
+    "state": "CA"
+  },
+  {
+    "name": "Portland",
+    "population": 639863,
+    "landlocked": true,
+    "state": "OR"
+  },
+  {
+    "name": "Depoe Bay",
+    "population": 1448,
+    "landlocked": false,
+    "state": "OR"
+  },
+  {
+    "name": "Denver",
+    "population": 693060,
+    "landlocked": true,
+    "state": "CO"
+  },
+  {
+    "name": "Colorado Springs",
+    "population": 465101,
+    "landlocked": true,
+    "state": "CO"
+  }
+]
