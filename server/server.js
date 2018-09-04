@@ -5,7 +5,7 @@ const app = express();
 
 const request = require('superagent');
 
-const cors= require('cors');
+const cors = require('cors');
 const morgan = require('morgan');
 app.use(morgan('dev'));
 app.use(cors());
@@ -24,7 +24,7 @@ app.post('/api/auth/signup', (req, res) => {
     res.status(400).send({
       error: 'email and password are required'
     });
-    return
+    return;
   }
 
   client.query(`
