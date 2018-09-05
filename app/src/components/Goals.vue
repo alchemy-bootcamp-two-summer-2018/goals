@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="goals">
     <h2> Goals </h2>
     <nav>
       <router-link to="/goals/list">list</router-link>
@@ -42,7 +42,7 @@ export default {
 </script>
 
 <style scoped>
-pre {
-  text-align: left;
+.goals {
+  text-align: center;
 }
 </style>

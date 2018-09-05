@@ -1,5 +1,5 @@
 <template id="neighborhood-template">
-  <div class="form-control">
+  <div>
     <label>
       {{ label }}
     </label>
@@ -20,11 +20,6 @@ export default {
 </script>
 
 <style scoped>
-
-.form-control {
-  width: 300px;
-  text-align: left;
-}
 
 label {
   display: block;

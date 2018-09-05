@@ -54,7 +54,7 @@ body {
 }
 
 
-#app {
+#goal-app {
   align-items: center;
   display: grid;
   grid-auto-flow: row;

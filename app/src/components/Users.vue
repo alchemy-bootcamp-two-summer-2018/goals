@@ -35,4 +35,8 @@ export default {
 </script>
 
 <style scoped>
+.list {
+  text-align: center;
+  list-style-type: none;
+}
 </style>

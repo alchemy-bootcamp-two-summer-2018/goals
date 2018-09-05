@@ -66,9 +66,25 @@ export default {
 <style>
 .goal-form {
   width: 300px;
-  text-align: left;
+  text-align: center;
 }
+
 label {
   display: block;
+}
+button {
+    border: 1px solid #383961;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    -webkit-transition-duration: 0.4s; 
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+button:hover {
+  background-color: #383961;
+  color: white;
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
 </style>

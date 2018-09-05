@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section class="goal-form">
     <GoalForm 
       label="Add"
       :on-edit="onAdd"/>
@@ -17,12 +17,8 @@ export default {
 </script>
 
 <style>
-pre {
-  color: red;
-}
-ul.list {
-  margin: 0;
-  padding: 0;
-  list-style-type: none;
+.goal-form {
+  width: 300px;
+  text-align: center;
 }
 </style>

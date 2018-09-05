@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="auth-form">
     <h2>{{ label }}</h2>
     <button @click="type = isSignUp ? 'signIn' : 'signUp'">
       {{
@@ -9,15 +9,16 @@
       }}
     </button>
     <pre>{{ error }}</pre>
-    <form @submit.prevent="handleSubmit">
+    <form class="auth-form" @submit.prevent="handleSubmit">
       <FormControl label="email">
         <input v-model="credentials.email">
       </FormControl>
       <FormControl label="password">
         <input 
+          class="password"
           :type="show ? 'text' : 'password'" 
-          v-model="credentials.password">
-        <button 
+          v-model="credentials.password"> <br>
+        <button
           @click="show = !show"
           type="button"
         >
@@ -89,5 +90,27 @@ export default {
 </script>
 
 <style scoped>
+.auth-form {
+  text-align: center;
+}
 
+.password {
+  margin-bottom: 5px;
+}
+
+button {
+    border: 1px solid #383961;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    -webkit-transition-duration: 0.4s; 
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+button:hover {
+  background-color: #383961;
+  color: white;
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
 </style>
