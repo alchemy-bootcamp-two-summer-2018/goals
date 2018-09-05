@@ -3,17 +3,33 @@
         <ul>
             <li>Hello World</li>
         </ul>
-        <AddGoals :onEdit="onAdd"/>
+        <AddGoals :on-add="handleAdd"/>
     </div>
 </template>
 
 <script>
 import AddGoals from './AddGoals.vue';
-
+import { addGoal }from '../services/api';
 export default {
-    props: ['onAdd'],
+    props: {
+
+    },
+    data() {
+        return {
+            goals: null
+        }
+    },
     components: {
         AddGoals
+    },
+    methods: {
+        handleAdd(goal) {
+            console.log(goal)
+            return addGoal(goal)
+                .then(saved => {
+                    this.goals.push(saved);
+                })
+        }
     }
 
 }

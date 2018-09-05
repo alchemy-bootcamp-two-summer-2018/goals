@@ -20,7 +20,14 @@ app.use(express.static('public'));
 // connect to the database
 const client = require('./db-client');
 
+app.post('/api/goals', (req, res, next) => {
+    const body = req.body;
+    if(body.name === 'error') return next('bad name');
 
+    client.query(`
+        insert into
+    `)
+})
 
 
 

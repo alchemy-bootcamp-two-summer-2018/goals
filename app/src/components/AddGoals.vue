@@ -2,7 +2,7 @@
     <section class="goal-form">
         <form @submit.prevent="handleSubmit">
             <label>
-                Add a goal<input type="text" name="goal" placeholder="Do it!">
+                Add a goal<input type="text" name="goal" placeholder="Do it!" v-model="goal.name">
             </label>
             <!-- <FormControl label="Add a goal">
                 <input type="text" name="goal">
@@ -17,27 +17,27 @@ import FormControl from './FormControl.vue';
 
 const initGoal = () => {
     return {
-        goal: ''
+        name: ''
     }
 }
 export default {
     data() {
         return {
-            edit: this.goal ? Object.assign({}, this.goal) : initGoal()
+            goal: initGoal(),
+            // edit: this.goal ? Object.assign({}, this.goal) : initGoal()
         }
     },
     props: {
-        onEdit: {
+        onAdd: {
             type: Function,
             required: true
         }
     },
     methods: {
         handleSubmit() {
-            return this.onEdit(this.edit)
-                console.log(this.edit)
+            return this.onAdd(this.goal)
                 .then(() => {
-                    this.edit = initGoal();
+                    this.goal = initGoal();
                 })
         }
     },
