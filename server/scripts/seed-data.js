@@ -17,15 +17,14 @@ Promise.all(
     return Promise.all(
       goals.map(goal => {
         return client.query(`
-            INSERT INTO goals (
-              name,  
+            INSERT INTO goals (  
               user_id, 
               description,
               completed
             )
-            VALUES ($1, $2, $3, $4);
+            VALUES ($1, $2, $3);
         `,
-        [goal.name, goal.user_id, goal.description, goal.completed]
+        [goal.user_id, goal.description, goal.completed]
         ).then(result => result.rows[0]);
       })
     );

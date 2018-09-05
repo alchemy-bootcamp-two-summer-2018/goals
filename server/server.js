@@ -114,7 +114,6 @@ app.get('/api/users', (req, res) => {
   client.query(`
     SELECT 
       g.id,
-      g.name,
       g.user_id as "userId",
       g.description,
       g.completed 
@@ -142,7 +141,6 @@ app.get('/api/me/goals', (req, res) => {
   client.query(`
     SELECT 
       id,
-      name,
       user_id as "userId", 
       description,
       completed
@@ -163,11 +161,11 @@ app.post('/api/me/goals', (req, res) => {
   const body = req.body;
 
   client.query(`
-    INSERT INTO goals (user_id, name, description, completed)
-    VALUES ($1, $2, $3, $4)
+    INSERT INTO goals (user_id, description, completed)
+    VALUES ($1, $2, $3)
     RETURNING *, user_id as "userId";
   `,
-  [req.userID, body.name, body.description, body.completed]
+  [req.userID, body.description, body.completed]
   )
     .then(result => {
       res.send(result.rows[0]);
@@ -181,14 +179,13 @@ app.put('/api/me/goals', (req, res) => {
   client.query(`
     update goals
     set
-      name = $1,
-      description = $2,
-      completed = $3,
-    where id = $4,
-    and user_id = $5
+      description = $1,
+      completed = $2,
+    where id = $3,
+    and user_id = $4
     returning *, user_id as "userId";
   `,
-  [body.name, body.description, body.completed, req.params.id, req.userId]
+  [body.description, body.completed, req.params.id, req.userId]
   ).then(result => {
     res.send(result.rows[0]);
   });
