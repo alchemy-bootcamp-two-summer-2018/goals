@@ -14,7 +14,7 @@
         &nbsp;
         <a v-if="user" href="/" @click.prevent="handleSignOut">Sign Out</a>
       </nav>
-
+      <div></div>
       <span v-if="user">user: {{ user.email }}</span>
     </header>
 
@@ -50,21 +50,20 @@ export default {
 </script>
 
 <style>
-#app {
+/* #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
-}
+} */
 
 .nav {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   flex-wrap: wrap;
 }
 
 header {
-    background-color: #5F7367;
     text-align: center;
 }
 
