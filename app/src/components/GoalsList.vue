@@ -1,14 +1,14 @@
 <template>
   <div>
-    <h3>Neigborhoods List</h3>
-    <ul v-if="neighborhoods">
+    <h3>Goals List</h3>
+    <ul v-if="goals">
       <li
-        v-for="neighborhood in neighborhoods"
-        :key="neighborhood.id"
+        v-for="goal in goals"
+        :key="goal.id"
       >
-        <strong>{{ neighborhood.name }}</strong>
+        <strong>{{ goal.description }}</strong>
         &nbsp;
-        {{ neighborhood.description }}
+        {{ goal.completed }}
       </li>
     </ul>
   </div>
@@ -16,7 +16,7 @@
 
 <script>
 export default {
-  props: ['neighborhoods']
+  props: ['goals']
 };
 </script>
 

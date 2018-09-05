@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <header>
-      <h1>Neighborhoods Demo</h1>
+      <h1>Goals</h1>
       
       <nav>
         <RouterLink to="/">Go to <strong>Home</strong></RouterLink>

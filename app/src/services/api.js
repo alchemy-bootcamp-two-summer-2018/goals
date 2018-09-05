@@ -2,7 +2,7 @@ const URL = '/api';
 const NEIGHBORHOODS_URL = `${URL}/neighborhoods`;
 const RESTAURANTS_URL = `${URL}/restaurants`;
 const AUTH_URL = `${URL}/auth`;
-const GOALS_URL = `${URL}/goals`;
+const GOALS_URL = `${URL}/me/goals`;
 const USERS_URL = `${URL}/users`;
 
 function responseHandler(response) {

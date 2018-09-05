@@ -253,7 +253,7 @@ app.get('/api/restaurants', (req, res, next) => {
 
 app.post('/api/me/goals', (req, res, next) => {
   const body = req.body;
-  if(body.name === 'error') return next('bad name');
+  if(body.description === 'error') return next('bad name');
 
   client.query(`
     insert into goals (user_id, description, completed)
@@ -298,7 +298,7 @@ app.get('/api/me/goals', (req, res, next) => {
       completed
     from goals
     where user_id = $1
-    order by name;
+    order by description;
   `,
   [req.userId]
   )
