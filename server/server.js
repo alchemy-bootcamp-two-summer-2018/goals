@@ -115,21 +115,21 @@ app.get('/api/me/goals', (req, res) => {
     .catch(err => console.log(err));
 });
 
-// app.post('/api/me/goals', (req, res, next) => {
-//   const body = req.body;
-//   if(body.name === 'error') return next('bad name');
+app.post('/api/me/goals', (req, res, next) => {
+  const body = req.body;
+  if(body.name === 'error') return next('bad name');
 
-//   client.query(`
-//     INSERT INTO goals (goal, complete)
-//     values ($1, false)
-//     returning *, "user_id as userId";
-//   `,
-//   [req.goal, req.complete]
-//   ).then(result => {
-//     res.send(result.rows[0]);
-//   })
-//     .catch(next);
-// });
+  client.query(`
+    INSERT INTO goals (goal, user_id)
+    values ($1, $2)
+    returning *, user_id as "userID";
+  `,
+  [body.goal, req.userId]
+  ).then(result => {
+    res.send(result.rows[0]);
+  })
+    .catch(next);
+});
 
 // app.get('/api/users', (req, res) => {
 //   client.query(`

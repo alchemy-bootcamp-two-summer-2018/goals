@@ -11,7 +11,7 @@ client.query(`
   CREATE TABLE IF NOT EXISTS goals (
     id SERIAL PRIMARY KEY,
     goal VARCHAR(1000),
-    complete BOOLEAN NOT NULL,
+    complete BOOLEAN DEFAULT false,
     user_id INTEGER NOT NULL REFERENCES users(id)
   );
 `)

@@ -9,6 +9,7 @@
       >
         {{ goal.goal }}
         {{ goal.status }}
+      <button @click="handleComplete" >Done</button>
       </p>
     </div>
   </div>
@@ -36,8 +37,10 @@ export default {
       return addGoal(goal)
         .then(saved => {
           this.goals.push(saved);
-          this.$router.push('/goals');
         });
+    },
+    handleComplete(goal) {
+      return 
     }
   },
   components: {
