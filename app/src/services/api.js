@@ -107,4 +107,12 @@ export function removeGoal() {
 }
 
 
+// users functions
+
+export function getUsers() {
+  return fetch(USERS_URL, {
+    headers: getHeaders()
+  })
+    .then(responseHandler);
+}
 
