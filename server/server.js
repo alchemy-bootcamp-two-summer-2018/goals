@@ -268,27 +268,6 @@ app.post('/api/me/goals', (req, res, next) => {
     .catch(next);
 });
 
-
-// app.put('/api/me/goals', (req, res, next) => {
-//   const body = req.body;
-
-//   client.query(`
-//     update goals
-//     set
-//       name = $1,
-//       description = $2,
-//       completed = $3
-//     where id = $4,
-//     and user_id = $5
-//     returning *, user_id as "userId";
-//   `,
-//   [body.name, body.description, body.completed, req.params.id, req.userId]
-//   ).then(result => {
-//     res.send(result.rows[0]);
-//   })
-//     .catch(next);
-// });
-
 app.put('/api/me/goals', (req, res) => {
   console.log('posting');
   const body = req.body;
@@ -299,9 +278,9 @@ app.put('/api/me/goals', (req, res) => {
       completed = $4, 
       user_id = $5
     WHERE id = $1
-    RETURNING *;
+    RETURNING *, user_id as "userId";
   `,
-  [body.id, body.name, body.description, body.completed, body.user_id]
+  [body.id, body.name, body.description, body.completed, req.userId]
   )
     .then(result => {
       res.send(result.rows[0]);
