@@ -7,12 +7,10 @@ const app = express();
 // superagent client AJAX library for calling 3rd party APIs
 const request = require('superagent');
 
-// logging
-const morgan = require('morgan');
-app.use(morgan('dev'));
-
 // middleware (cors and read json body)
 const cors = require('cors');
+const morgan = require('morgan');
+app.use(morgan('dev'));
 app.use(cors());
 app.use(express.json());
 
@@ -22,7 +20,8 @@ app.use(express.static('public'));
 // connect to the database
 const client = require('./db-client');
 
-//auth routes
+// auth routes
+
 app.post('/api/auth/signup', (req, res) => {
   const body = req.body;
   const email = body.email;
@@ -109,20 +108,77 @@ app.use((req, res, next) => {
   next();
 });
 
-// api data routes
+
+app.post('/api/me/goals', (req, res, next) => {
+  const body = req.body;
+  if(body.description === 'error') return next('bad name');
+
+  client.query(`
+    insert into goals (user_id, description, completed)
+    values ($1, $2, $3)
+    returning *, user_id as "userId";
+  `,
+  [req.userId, body.description, body.completed]
+  ).then(result => {
+    // send back object
+    res.send(result.rows[0]);
+  })
+    .catch(next);
+});
+
+app.put('/api/me/goals', (req, res) => {
+  console.log('posting');
+  const body = req.body;
+  client.query(`
+    UPDATE goals
+    SET description = $2, 
+      completed = $3, 
+      user_id = $4
+    WHERE id = $1
+    RETURNING *, user_id as "userId";
+  `,
+  [body.id, body.description, body.completed, req.userId]
+  )
+    .then(result => {
+      res.send(result.rows[0]);
+    })
+    .catch(err => console.log(err));
+  
+});
+
+app.get('/api/me/goals', (req, res, next) => {
+
+  client.query(`
+    select 
+      id, 
+      user_id as "userId", 
+      description, 
+      completed
+    from goals
+    where user_id = $1
+    order by description;
+  `,
+  [req.userId]
+  )
+    .then(result => {
+      res.send(result.rows);
+    })
+    .catch(next);
+});
+
 app.get('/api/users', (req, res) => {
   client.query(`
-    SELECT 
-      g.id,
-      g.user_id as "userId",
-      g.description,
-      g.completed 
-      FROM goals g;
-
-      SELECT
-      u.id, 
-      u.email
-      FROM users u;
+  SELECT
+  g.id,
+  g.user_id as "userId",
+  g.description,
+  g.completed
+  FROM goals g;
+  
+    SELECT
+    u.id, 
+    u.email
+    FROM users u;
   `)
     .then(result => {
       const goals = result[0].rows;
@@ -137,68 +193,7 @@ app.get('/api/users', (req, res) => {
     .catch(err => console.log(err));
 });
 
-app.get('/api/me/goals', (req, res) => {
-  client.query(`
-    SELECT 
-      id,
-      user_id as "userId", 
-      description,
-      completed
-    FROM goals
-    WHERE user_id = $1;
-  `,
-  [req.userId]
-  )
-    .then(result => {
-      res.send(result.rows);
-    })
-    .catch(err => console.log(err));
-  
-});
 
-app.post('/api/me/goals', (req, res) => {
-  console.log('posting');
-  const body = req.body;
-
-  client.query(`
-    INSERT INTO goals (user_id, description, completed)
-    VALUES ($1, $2, $3)
-    RETURNING *, user_id as "userId";
-  `,
-  [req.userID, body.description, body.completed]
-  )
-    .then(result => {
-      res.send(result.rows[0]);
-    })
-    .catch(err => console.log(err));
-});
-
-app.put('/api/me/goals', (req, res) => {
-  const body = req.body;
-
-  client.query(`
-    update goals
-    set
-      description = $1,
-      completed = $2,
-    where id = $3,
-    and user_id = $4
-    returning *, user_id as "userId";
-  `,
-  [body.description, body.completed, req.params.id, req.userId]
-  ).then(result => {
-    res.send(result.rows[0]);
-  });
-});
-
-app.get('/api/famous', (req, res) => {
-  client.query(`
-    SELECT *
-    FROM famous;
-  `)
-    .then(result => {
-      res.send(result.rows);
-    });
-});
-
-app.listen(3000, () => console.log('app running...'));
+// start "listening" (run) the app (server)
+const PORT = process.env.PORT;
+app.listen(PORT, () => console.log('server running on port', PORT));

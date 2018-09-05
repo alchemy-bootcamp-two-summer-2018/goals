@@ -1,12 +1,12 @@
 const URL = '/api';
-const GOALS_URL = `${URL}/goals`;
 const AUTH_URL = `${URL}/auth`;
+const GOALS_URL = `${URL}/me/goals`;
 const USERS_URL = `${URL}/users`;
 
 function responseHandler(response) {
   if(response.ok) return response.json();
-  return response.json().then(body => {
-    throw body.error;
+  return response.json().then(body => { 
+    throw body.error; 
   });
 }
 
@@ -19,6 +19,7 @@ function getHeaders() {
 }
 
 export function signUp(credentials) {
+  console.log('auth', AUTH_URL);
   return fetch(`${AUTH_URL}/signup`, {
     method: 'POST',
     headers: getHeaders(),
@@ -30,7 +31,7 @@ export function signUp(credentials) {
       return user;
     });
 }
-  
+
 export function signIn(credentials) {
   return fetch(`${AUTH_URL}/signin`, {
     method: 'POST',
@@ -43,23 +44,23 @@ export function signIn(credentials) {
       return user;
     });
 }
-  
+
 function storeUser(user) {
   token = user.id;
   window.localStorage.setItem('user', JSON.stringify(user));
 }
-  
+
 export function signOut() {
   token = '';
   window.localStorage.removeItem('user');
 }
-  
+
 export function checkForToken() {
   const json = window.localStorage.getItem('user');
   if(!json) {
     return null;
   }
-  
+
   const user = JSON.parse(json);
   token = user.id;
   return user;
@@ -71,7 +72,13 @@ export function getGoals() {
   })
     .then(responseHandler);
 }
-  
+export function getUsersandGoals() {
+  return fetch(USERS_URL, {
+    headers: getHeaders()
+  })
+    .then(responseHandler);
+}
+
 export function addGoal(goal) {
   return fetch(GOALS_URL, {
     method: 'POST',
@@ -80,13 +87,12 @@ export function addGoal(goal) {
   })
     .then(responseHandler);
 }
-  
+
 export function updateGoal(goal) {
-  return fetch(`${GOALS_URL}/${goal.id}`, {
+  return fetch(GOALS_URL, {
     method: 'PUT',
     headers: getHeaders(),
     body: JSON.stringify(goal)
   })
     .then(responseHandler);
 }
-
