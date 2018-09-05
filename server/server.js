@@ -21,6 +21,7 @@ app.use(express.static('public'));
 const client = require('./db-client');
 
 // auth routes
+
 app.post('/api/auth/signup', (req, res) => {
   const body = req.body;
   const email = body.email;
@@ -57,7 +58,6 @@ app.post('/api/auth/signup', (req, res) => {
     });
 
 });
-
 app.post('/api/auth/signin', (req, res) => {
   const body = req.body;
   const email = body.email;
@@ -89,7 +89,6 @@ app.post('/api/auth/signin', (req, res) => {
       });
     });
 });
-
 app.use((req, res, next) => {
   // is there a Authorization header?
   const id = req.get('Authorization');
@@ -108,67 +107,59 @@ app.use((req, res, next) => {
 });
 
 // api data routes
-app.get('/api/neighborhoods', (req, res, next) => {
 
+// goals
+app.get('/api/me/goals', (req, res, next) => {
   client.query(`
-    select id, 
-      name, 
-      quadrant_id as "quadrantId", 
-      description, 
-      population, 
-      founded
-    from neighborhoods
-    order by name;
-  `).then(result => {
+    SELECT 
+      id,
+      user_id as "userId",
+      is_completed as "isCompleted",
+      description
+    FROM goals 
+    WHERE user_id=$1;
+  `,
+  [req.params.id]
+  ).then((result) => {
     res.send(result.rows);
   })
     .catch(next);
-
 });
-
-app.post('/api/neighborhoods', (req, res, next) => {
+app.post('/api/me/goals', (req, res, next) => {
   const body = req.body;
-  if(body.name === 'error') return next('bad name');
-  
+
   client.query(`
-    insert into neighborhoods (user_id, name, quadrant_id, population, founded, description)
-    values ($1, $2, $3, $4, $5, $6)
-    returning *, quadrant_id as "quadrantId";
+    INSERT INTO goals (user_id, is_completed, description)
+    VALUES ($1, $2, $3)
+    RETURNING *;
   `,
-  [req.userId, body.name, body.quadrantId, body.population, body.founded, body.description]
+  [body.userId, body.isCompleted, body.description]
   ).then(result => {
-    // send back object
     res.send(result.rows[0]);
   })
     .catch(next);
 });
-
-app.put('/api/neighborhoods/:id', (req, res, next) => {
+app.put('/api/me/goals', (req, res, next) => {
   const body = req.body;
 
   client.query(`
-    update neighborhoods
+    update goals
     set
-      name = $1,
-      quadrant_id = $2,
-      population = $3,
-      founded = $4,
-      description = $5
-    where id = $6,
-    and user_id = $7
-    returning *, quadrant_id as "quadrantId";
+      is_completed = $1,
+      description = $2
+    where id = $3,
+    and user_id = $4
+    returning *, goals_id as "goalId";
   `,
-  [body.name, body.quadrantId, body.population, body.founded, 
-    body.description, req.params.id, req.userId]
+  [body.isCompleted, body.description, req.params.id, req.userId]
   ).then(result => {
     res.send(result.rows[0]);
   })
     .catch(next);
 });
-
-app.delete('/api/neighborhoods/:id', (req, res, next) => {
+app.delete('/api/me/goals', (req, res, next) => {
   client.query(`
-    delete from neighborhoods where id=$1;
+    delete from goals where id=$1;
   `,
   [req.params.id]
   ).then(() => {
@@ -177,18 +168,18 @@ app.delete('/api/neighborhoods/:id', (req, res, next) => {
     .catch(next);
 });
 
-app.get('/api/quadrants', (req, res, next) => {
+// users
+app.get('/api/users', (req, res, next) => {
 
   client.query(`
-    select 
-      q.id, q.name, q.direction,
-      count(n.id) as "neighborhoodCount",
-      avg(n.population) as "populationAvg "
-    from quadrants q
-    left join neighborhoods n
-    on q.id = n.quadrant_id
-    group by q.id
-    order by q.name;
+    SELECT 
+      u.id, u.email,
+      count(g.id) as "goalCount"
+    FROM users u 
+    JOIN goals g
+    on u.id = g.user_id
+    group by u.id
+    order by u.email;
   `)
     .then(result => {
       res.send(result.rows);
@@ -200,57 +191,6 @@ app.get('/api/quadrants', (req, res, next) => {
     // we can just pass next _as_ the error callback function:
     .catch(next);
 });
-
-app.get('/api/quadrants/:id', (req, res, next) => {
-
-  const quadrantPromise = client.query(`
-    select id, name, direction
-    from quadrants q
-    where q.id = $1;
-  `,
-  [req.params.id]);
-
-  const neighborhoodsPromise = client.query(`
-    select id, name, description
-    from neighborhoods
-    where quadrant_id = $1;
-  `,
-  [req.params.id]);
-
-  Promise.all([quadrantPromise, neighborhoodsPromise])
-    .then(promiseValues => {
-      const quadrantResult = promiseValues[0];
-      const neighborhoodsResult = promiseValues[1];
-
-      if(quadrantResult.rows.length === 0) {
-        res.sendStatus(404);
-        return;
-      }
-
-      const quadrant = quadrantResult.rows[0];
-      const neighborhoods = neighborhoodsResult.rows;
-      quadrant.neighborhoods = neighborhoods;
-
-      res.send(quadrant);
-    })
-    .catch(next);
-});
-
-app.get('/api/restaurants', (req, res, next) => {
-  request.get(`${process.env.RESTAURANTS_API}/restaurant-inspections/`)
-    .then(result => {
-      res.send(result.body.results.map(rest => {
-        return {
-          address: rest.address,
-          name: rest.name,
-          inspectionNumber: rest.inspection_number
-        };
-      }));
-    })
-    .catch(next);
-});
-
-
 
 
 // start "listening" (run) the app (server)
