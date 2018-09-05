@@ -5,16 +5,15 @@
       
       <nav class="nav">
         <router-link to="/">Go <strong>Home</strong></router-link>
-        &nbsp;
+        
         <router-link v-if="user" to="/goals">Go to Goals</router-link>
-        &nbsp;
+        
         <router-link v-if="user" to="/users">Go to Users</router-link>
-        &nbsp;
+        
         <router-link v-if="!user" to="/auth">Sign In</router-link>
-        &nbsp;
+        
         <a v-if="user" href="/" @click.prevent="handleSignOut">Sign Out</a>
       </nav>
-      <div></div>
       <span v-if="user">user: {{ user.email }}</span>
     </header>
 

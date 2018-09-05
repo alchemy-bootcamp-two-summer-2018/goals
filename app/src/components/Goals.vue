@@ -1,6 +1,6 @@
 <template>
   <div class="goals">
-    <h2> Goals </h2>
+    <h2> Personal Goals </h2>
     <nav>
       <router-link to="/goals/list">list</router-link>
       &nbsp;

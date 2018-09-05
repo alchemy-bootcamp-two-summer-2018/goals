@@ -1,6 +1,5 @@
 <template>
   <div id="goal-app">
-    <h3>Goals List</h3>
     <div class="goal" v-for="(goal, i) in goals" :key="goal.description">
       <button @click="markAsCompleted(i)" class="goal__checkbox" :class="{goal__checkbox__completed: goal.completed}"></button>
       <p class="goal__text" :class="{goal__text__completed: goal.completed}">{{ goal.description}}</p>
