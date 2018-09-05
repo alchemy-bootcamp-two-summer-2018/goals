@@ -95,5 +95,71 @@ app.use((req, res, next) => {
   next();
 });
 
+app.get('/api/me/goals', (req, res) => {
+  client.query(`
+    SELECT
+      id,
+      goal,
+      complete,
+      user_id as "userID"
+      FROM goals g
+      WHERE user_id = $1
+      ORDER BY id;
+  `,
+  [req.userId]
+  )
+    .then(result => {
+      console.log(result);
+      res.send(result.rows);
+    })
+    .catch(err => console.log(err));
+});
+
+// app.get('/api/users', (req, res) => {
+//   client.query(`
+//     SELECT
+//       g.id,
+//       g.goal,
+//       g.complete,
+//       u.id as "userID"
+//       FROM goals g
+//       RIGHT JOIN users u
+//       ON u.id = g.user_id
+//       ORDER BY g.goal;
+//   `)
+//     .then(result => {
+//       console.log(result);
+//       res.send(result.rows);
+//     })
+//     .catch(err => console.log(err));
+// });
+
+// app.get('/api/users', (req, res) => {
+//   client.query(`
+//     SELECT
+//       g.id,
+//       g.goal,
+//       g.complete,
+//       g.user_id as "userId"
+//       FROM goals g;
+
+//     SELECT
+//       u.id,
+//       u.email
+//       FROM users u;
+//   `)
+//     .then(result => {
+//       const goals = result[0];
+//       const users = result[1];
+//       users.forEach(user => {
+//         user.goals = goals.filter(goal => {
+//           return goal.userID === goal.id;
+//         });
+//       });
+//       res.send(users);
+//     })
+//     .catch(err => console.log(err));
+// });
+
 const PORT = process.env.PORT;
 app.listen(PORT, () => console.log('server running on port', PORT));

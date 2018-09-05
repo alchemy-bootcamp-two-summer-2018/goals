@@ -1,0 +1,47 @@
+[
+  {
+    "goal": "meditate daily",
+    "complete": false,
+    "user_id": 1
+  },
+  {
+    "goal": "eat healthy",
+    "complete": false,
+    "user_id": 1
+  },
+  {
+    "goal": "spring cleaning",
+    "complete": true,
+    "user_id": 1
+  },
+  {
+    "goal": "visit India",
+    "complete": false,
+    "user_id": 2
+  },
+  {
+    "goal": "stick to budget",
+    "complete": false,
+    "user_id": 2
+  },
+  {
+    "goal": "create dating profile",
+    "complete": true,
+    "user_id": 2
+  },
+  {
+    "goal": "try a new restaurant",
+    "complete": false,
+    "user_id": 3
+  },
+  {
+    "goal": "summit Mt. Everest",
+    "complete": false,
+    "user_id": 3
+  },
+  {
+    "goal": "visit Santa Cruz",
+    "complete": true,
+    "user_id": 3
+  }
+]

@@ -2,9 +2,9 @@ require('dotenv').config();
 const client = require('../db-client');
 
 client.query(`
-  DROP TABLE IF EXISTS users;
-  DROP TABLE IF EXISTS goals;
-  DROP TABLE IF EXISTS statuses;
+  DROP TABLE IF EXISTS users CASCADE;
+  DROP TABLE IF EXISTS goals CASCADE;
+  DROP TABLE IF EXISTS statuses CASCADE;
 `)
   .then(
     () => console.log('drop tables complete'),

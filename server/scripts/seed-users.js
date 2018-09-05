@@ -1,19 +1,19 @@
 require('dotenv').config();
 const client = require('../db-client');
-const statuses = require('./statuses.json');
+const users = require('./users.json');
 
 Promise.all(
-  statuses.map(status => {
+  users.map(user => {
     return client.query(`
-      INSERT INTO statuses (status)
-      VALUES ($1);
+      INSERT INTO users (email, password)
+      VALUES ($1, $2);
     `,
-    [status.status]
+    [user.email, user.password]
     ).then(result => result.rows[0]);
   })
 )
   .then(
-    () => console.log('seed data load successful'),
+    () => console.log('seed user data load successful'),
     err => console.error(err)
   )
   .then(() => client.end());
