@@ -1,0 +1,22 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "create-tables.js",
+  "scripts": {
+    "create-tables": "node scripts/create-tables.js",
+    "drop-tables": "node scripts/drop-tables.js",
+    "recreate-tables": "npm run drop-tables && npm run create-tables",
+    "seed-data": "node scripts/seed-data.js",
+    "db-load-all": "npm run recreate-tables && npm run seed-data",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start:watch": "nodemon server.js",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^6.0.0",
+    "pg": "^7.4.3"
+  }
+}
