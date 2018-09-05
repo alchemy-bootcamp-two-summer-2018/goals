@@ -7,7 +7,7 @@ Vue.config.productionTip = false;
 
 Vue.use(VueRouter);
 Vue.component('RouterLink', Vue.component('router-link'));
-Vue.componen('RouterView', Vue.component('router-view'));
+Vue.component('RouterView', Vue.component('router-view'));
 
 new Vue({
   router,

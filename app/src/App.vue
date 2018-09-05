@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import { checkForToken, signOut } from './services.api';
+import { checkForToken, signOut } from './services/api';
 
 export default {
   data() {

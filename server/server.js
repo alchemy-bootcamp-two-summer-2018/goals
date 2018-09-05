@@ -28,7 +28,7 @@ app.post('/api/auth/signup', (req, res) => {
   }
 
   client.query(`
-    select cout(*)
+    select count(*)
     from users
     where email = $1
   `,
