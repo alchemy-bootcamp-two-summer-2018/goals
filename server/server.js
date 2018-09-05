@@ -3,8 +3,6 @@ require('dotenv').config();
 const express = require('express');
 const app = express();
 
-const request = require('superagent');
-
 const cors = require('cors');
 const morgan = require('morgan');
 app.use(morgan('dev'));
@@ -51,5 +49,37 @@ app.post('/api/auth/signup', (req, res) => {
         .then(results => {
           res.send(results.rows[0]);
         });    
+    });
+});
+
+app.post('/api/auth/signin', (req, res) => {
+  const body = req.body;
+  const email = body.email;
+  const password = body.password;
+
+  if(!email || !password) {
+    res.status(400).send({
+      error: 'Please enter an email and password.'
+    });
+    return;
+  }
+
+  client.query(`
+    SELECT id, email, password
+    FROM users
+    WHERE email = $1
+  `,
+  [email]
+  )
+    .then(results => {
+      const row = results.rows[0];
+      if(!row || row.password !== password) {
+        res.status(401).send({ error: 'incorrect email and/or password' });
+        return;
+      }
+      res.send({
+        id: row.id,
+        email: row.email
+      });
     });
 });
