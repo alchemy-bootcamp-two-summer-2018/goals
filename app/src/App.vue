@@ -6,8 +6,6 @@
       <nav>
         <RouterLink to="/">Go to <strong>Home</strong></RouterLink>
         &nbsp;
-        <RouterLink v-if="user" to="/quadrants">Go to Quadrants</RouterLink>
-        &nbsp;
         <RouterLink v-if="!user" to="/auth">Sign In</RouterLink>
         &nbsp;
         <RouterLink v-if="user" to="/goals">Goals</RouterLink>

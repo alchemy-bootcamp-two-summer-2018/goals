@@ -2,10 +2,10 @@
   <div>
     <h2>I am the Home component</h2>
     <p>
-      Click <router-link to="/quadrants">here</router-link> to get started!
+      Click <router-link to="/auth">here</router-link> to get started!
     </p>
     <p>
-      See hottest neighborhoods in <router-link to="/quadrants/1">NW</router-link>!
+      Click <router-link to="/goals">here</router-link> for goals!
     </p>
   </div>
 </template>
