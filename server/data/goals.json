@@ -1,23 +1,19 @@
 
 [
-    { "name": "lauren",
-      "user_id": 1,
-      "completed": false,
+    { "user_id": 1,
+      "completed": "yes",
       "description": "Do the thing"
     },
-    { "name": "paul",
-      "user_id": 2,
-      "completed": false,
+    { "user_id": 2,
+      "completed": "no",
       "description": "Do 2nd thing"
     },
-    { "name": "lauren",
-      "user_id": 1,
-      "completed": true,
+    { "user_id": 1,
+      "completed": "yes",
       "description": "Do that thing I already did"
     },
-    { "name": "paul",
-      "user_id": 1,
-      "completed": false,
+    { "user_id": 1,
+      "completed": "no",
       "description": "Do the thing (#4)"
     }
   ]

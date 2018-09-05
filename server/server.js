@@ -256,11 +256,11 @@ app.post('/api/me/goals', (req, res, next) => {
   if(body.name === 'error') return next('bad name');
 
   client.query(`
-    insert into goals (user_id, name, description, completed)
-    values ($1, $2, $3, $4)
+    insert into goals (user_id, description, completed)
+    values ($1, $2, $3)
     returning *, user_id as "userId";
   `,
-  [req.userId, body.name, body.description, body.completed]
+  [req.userId, body.description, body.completed]
   ).then(result => {
     // send back object
     res.send(result.rows[0]);
@@ -273,14 +273,13 @@ app.put('/api/me/goals', (req, res) => {
   const body = req.body;
   client.query(`
     UPDATE goals
-    SET name = $2, 
-      description = $3, 
-      completed = $4, 
-      user_id = $5
+    SET description = $2, 
+      completed = $3, 
+      user_id = $4
     WHERE id = $1
     RETURNING *, user_id as "userId";
   `,
-  [body.id, body.name, body.description, body.completed, req.userId]
+  [body.id, body.description, body.completed, req.userId]
   )
     .then(result => {
       res.send(result.rows[0]);
@@ -294,7 +293,6 @@ app.get('/api/me/goals', (req, res, next) => {
   client.query(`
     select 
       id, 
-      name, 
       user_id as "userId", 
       description, 
       completed
@@ -314,12 +312,12 @@ app.get('/api/users', (req, res, next) => {
 
   client.query(`
     select 
-      g.id, g.name, g.description, g.completed
+      g.id, g.description, g.completed
     from goals g
     join users u
     on u.id = g.user_id
     group by g.id
-    order by g.name;
+    order by g.id;
   `)
     .then(result => {
       res.send(result.rows);
