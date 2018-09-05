@@ -1,7 +1,6 @@
 <template>
   <div>
-    <h2> Goals </h2>
-    <nav>
+    <nav class="tiles">
       <NavLink to="/goals/list">list</NavLink>
       &nbsp;
       <NavLink to="/goals/new">add</NavLink>
@@ -46,6 +45,12 @@ export default {
 </script>
 
 <style scoped>
+.tiles {
+  padding-top: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 pre {
   text-align: left;
 }

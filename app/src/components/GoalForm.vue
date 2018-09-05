@@ -1,16 +1,12 @@
 <template id="goal-template">
   <section class="goal-form">
     <form @submit.prevent="handleSubmit">
-      <FormControl label="Description">
+      <div>
+      <FormControl label="New Goal Description">
         <input type="text" 
           name="description" placeholder="Description" required
           v-model="edit.description">
       </FormControl>
-
-      <!-- <FormControl label="Completed">
-        <input type="text" name="completed" placeholder="Completed" required
-          v-model.number="edit.completed">
-      </FormControl> -->
       
       <FormControl>
         <button type="submit">{{ label }}</button>
@@ -20,6 +16,7 @@
           Cancel
         </button>
       </FormControl>
+      </div>
     </form>
     <pre>{{ error }}</pre>
   </section>
@@ -69,12 +66,37 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .goal-form {
   width: 300px;
   text-align: left;
+  font-family: 'Open Sans';
+  padding-top: 50px;
 }
-label {
+
+section {
+  display: flex;
+  margin: auto;
+}
+
+input {
   display: block;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+button {
+    background: #fa504d;
+    border: none;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 10px;
+    font-weight: 600;
+    box-shadow: -4px 2px 20px -6px rgba(0,0,0,0.75);
+    transition: all .2s ease-in-out;
+    margin-bottom: 200px;
+}
+button:hover {
+    transform: scale(1.1); 
 }
 </style>

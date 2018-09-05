@@ -1,7 +1,7 @@
 <template>
   <li>
     <div class="title">
-      <h3>EMAIL: {{user.email}}</h3>
+      <h3>User: {{user.email}}</h3>
       <div v-for="(goal, i) in user.goals" :key="goal.description">
       <p> GOAL #{{i+1}}: {{goal.description}}</p>
       </div>
@@ -18,11 +18,16 @@ export default {
 </script>
 
 <style scoped>
-/* li {
-  list-style: none;
-  text-align: center;
-  position: relative;
+body {
+  font-family: 'Open Sans';
 }
+li {
+  list-style: none;
+}
+h3 {
+  color: red;
+}
+/*
 h3{
   font-family:'Playfair Display';
   font-size:25px;

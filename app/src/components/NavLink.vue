@@ -9,9 +9,9 @@
 <style scoped>
 .nav-link {
   height: 25px;
-  background: steelblue;
+  background: red;
   color: white;
-  padding: 7px;
+  padding: 15px;
   text-decoration: none;
 }
 .router-link-active .nav-link {

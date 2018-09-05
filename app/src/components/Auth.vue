@@ -1,14 +1,16 @@
 <template>
-  <div>
+  <section class="signup-form">
+    <div>
     <h2>{{ label }}</h2>
-    <button @click="type = isSignUp ? 'signIn' : 'signUp'">
+    <button class="signup-button" @click="type = isSignUp ? 'signIn' : 'signUp'">
       {{
         isSignUp
           ? "Already a user? Click here to sign in"
           : "New? Click here to sign up"
       }}
     </button>
-    <pre>{{ error }}</pre>
+    </div>
+    <div>
     <form @submit.prevent="handleSubmit">
       <FormControl label="email">
         <input v-model="credentials.email">
@@ -17,20 +19,21 @@
         <input 
           :type="show ? 'text' : 'password'" 
           v-model="credentials.password">
-        <button 
+        <button class='password-button'
           @click="show = !show"
           type="button"
         >
-          {{ show ? 'Hide' : 'Show' }}
+          {{ show ? 'Hide Password' : 'Show Password' }}
         </button>
       </FormControl>
       <FormControl>
-        <button type="submit">
+        <button class='submit-button' type="submit">
           {{ label }}
         </button>
       </FormControl>
     </form>
   </div>
+  </section>
 </template>
 
 <script>
@@ -87,4 +90,58 @@ export default {
 </script>
 
 <style scoped>
+.signup-form {
+  width: 300px;
+  text-align: left;
+  font-family: 'Open Sans';
+  padding-top: 50px;
+}
+
+section {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+}
+h2 {
+
+}
+button {
+  display: block;
+}
+input {
+  display: block;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+
+.submit-button {
+    background: #fa504d;
+    border: none;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 10px;
+    font-weight: 600;
+    box-shadow: -4px 2px 20px -6px rgba(0,0,0,0.75);
+    transition: all .2s ease-in-out;
+    margin-bottom: 200px;
+}
+
+.signup-button {
+    background: #fa504d;
+    border: none;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 10px;
+    font-weight: 600;
+    box-shadow: -4px 2px 20px -6px rgba(0,0,0,0.75);
+    transition: all .2s ease-in-out;
+    margin-bottom: 20px;
+}
+
+button:hover {
+    transform: scale(1.1); 
+} 
 </style>

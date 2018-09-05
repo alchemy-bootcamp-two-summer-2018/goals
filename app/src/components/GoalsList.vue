@@ -41,31 +41,24 @@ html {
   box-sizing: inherit;
 }
 
-body {
-  color: var(--gray);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  font-kerning: auto;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialised;
-  height: 100vh;
-  margin: 0;
-  text-rendering: optimizeLegibility;
-}
 
 
-#app {
+#goal-app {
   align-items: center;
   display: grid;
   grid-auto-flow: row;
   justify-items: center;
-  margin-top: 1.5rem;
+  margin-top: 30px;
+  padding-bottom: 200px;
 }
 
 [v-cloak] {
   display: none;
 }
 
+h3 {
+  font-family: 'Open Sans'
+}
 .add {
   grid-template-columns: 1fr;
 }

@@ -1,8 +1,6 @@
 <template>
   <div id="app">
     <header>
-      <h1>Goals</h1>
-      
       <nav>
         <RouterLink to="/">Go to <strong>Home</strong></RouterLink>
         &nbsp;
@@ -15,10 +13,14 @@
         <a v-if="user" href="/" @click.prevent="handleSignOut">Sign Out</a>
       </nav>
 
-      <span v-if="user">user: {{ user.email }}</span>
     </header>
 
     <RouterView :onUser="handleUser"/>
+
+    <footer> 
+      <img class="heart-image" :src="('/made-with-love.png')" />
+      <p> Made @ alchemy code lab PDX</p>
+    </footer>
   </div>
 </template>
 
@@ -46,15 +48,19 @@ export default {
 };
 </script>
 
-<style>
-/* #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
-  margin-top: 60px;
+<style scoped>
+footer p {
+
+  text-align: center !important;
 }
-h1, nav {
-    text-align: center;
-} */
+a {
+    font-family: 'Open Sans';
+    text-decoration: none;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin: 40px;
+    padding:5px;
+    color: white;
+  }
 </style>
