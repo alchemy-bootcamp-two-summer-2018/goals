@@ -17,3 +17,9 @@ const client = require('./db-client');
 
 const PORT = process.env.PORT;
 app.listen(PORT, () => console.log('server running on port', PORT));
+
+app.post('/api/auth/signup', (req, res) => {
+  const body = req.body;
+  const email = body.email;
+  const password = body.password;
+});
