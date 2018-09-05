@@ -56,7 +56,6 @@ export default {
   methods: {
     handleSubmit() {
       this.error = null;
-      console.log('inside add', this.edit);
       return this.onEdit(this.edit)
         // this fires when save is complete and data added to nieghborhoods array
         .then(() => {

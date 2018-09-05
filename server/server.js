@@ -166,28 +166,51 @@ app.get('/api/me/goals', (req, res, next) => {
     .catch(next);
 });
 
-app.get('/api/users', (req, res, next) => {
+// app.get('/api/users', (req, res, next) => {
 
+//   client.query(`
+//     select 
+//       g.id, g.description, g.completed, g.user_id as "userId", u.email
+//     from goals g
+//     right join users as u
+//     on g.user_id = u.id
+//     order by g.user_id;
+//   ;
+
+//   `)
+//     .then(result => {
+//       res.send(result.rows);
+//     })
+//     .catch(next);
+// });
+
+app.get('/api/users', (req, res) => {
   client.query(`
-    select 
-      g.id, g.description, g.completed, g.user_id, u.email
-    from goals g
-    right join users as u
-    on g.user_id = u.id
-    order by g.user_id;
-  ;
-
+  SELECT
+  g.id,
+  g.user_id as "userId",
+  g.description,
+  g.completed
+  FROM goals g;
+  
+    SELECT
+    u.id, 
+    u.email
+    FROM users u;
   `)
     .then(result => {
-      res.send(result.rows);
+      const goals = result[0].rows;
+      const users = result[1].rows;
+      users.forEach(user => {
+        user.goals = goals.filter(goal => {
+          return goal.userId === user.id;
+        });
+      });
+      res.send(users);
     })
-    // we don't need the wrapper function:
-    // .catch(err => {
-    //   next(err);
-    // });
-    // we can just pass next _as_ the error callback function:
-    .catch(next);
+    .catch(err => console.log(err));
 });
+
 
 // start "listening" (run) the app (server)
 const PORT = process.env.PORT;
