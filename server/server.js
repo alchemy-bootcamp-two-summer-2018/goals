@@ -21,20 +21,108 @@ app.use(express.static('public'));
 const client = require('./db-client');
 
 app.post('/api/goals', (req, res, next) => {
-    const body = req.body;
-    if(body.name === 'error') return next('bad name');
+  const body = req.body;
+  if(body.name === 'error') return next('bad name');
+
+  client.query(`
+    insert into goals (name)
+    values ($1)
+    returning *;
+  `,
+  [body.name]
+  ).then(result => {
+    res.send(result.rows[0]);
+  })
+    .catch(next);
+});
+
+
+app.post('/api/auth/signup', (req, res) => {
+  const body = req.body;
+  const email = body.email;
+  const password = body.password;
+  
+  if(!email || !password) {
+    res.status(400).send({
+    error: 'email and password are required'
+    });
+    return;
+  }
+  
+  client.query(`
+    select count(*)
+    from users
+    where email = $1
+  `,
+  [email])
+    .then(results => {
+    if(results.rows[0].count > 0) {
+      res.status(400).send({ error: 'email already in use' });
+      return;
+    }
 
     client.query(`
-        insert into goals (name)
-        values ($1)
-        returning *;
+      insert into users (email, password)
+      values ($1, $2)
+      returning id, email
     `,
-    [body.name]
-    ).then(result => {
-        res.send(result.rows[0]);
-    })
-        .catch(next);
+    [email, password])
+      .then(results => {
+      res.send(results.rows[0]);
+      });
+    });
 });
+    
+app.post('/api/auth/signin', (req, res) => {
+const body = req.body;
+const email = body.email;
+const password = body.password;
+    
+  if(!email || !password) {
+    res.status(400).send({
+    error: 'email and password are required'
+    });
+    return;
+  }
+  
+  client.query(`
+    select id, email, password
+    from users
+    where email = $1
+  `,
+  [email]
+  )
+    .then(results => {
+    const row = results.rows[0];
+    if(!row || row.password !== password) {
+      res.status(401).send({ error: 'invalid email or password' });
+      return;
+    }
+    res.send({ 
+      id: row.id,
+      email: row.email
+    });
+  });
+});
+
+app.use((req, res, next) => {
+  // is there a Authorization header?
+  const id = req.get('Authorization');
+  if(!id) {
+    // no - send an error
+    res.status(403).send({
+      error: 'No token found'
+    });
+    return;
+  }
+
+  // 1. set req.userId to the header
+  req.userId = id;
+  // 2. call next()
+  next();
+});
+
+
 
 
 

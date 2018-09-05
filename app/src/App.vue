@@ -3,10 +3,10 @@
     <Header/>
     <nav>
       <RouterLink class="nav-link" to="/">Home</RouterLink>
-      <RouterLink class="nav-link" to="/auth">Sign In</RouterLink>
-      <RouterLink class="nav-link" to="/goals">Goals</RouterLink>
+      <RouterLink v-if="!user" class="nav-link" to="/auth">Sign In</RouterLink>
+      <RouterLink v-if="user" class="nav-link" to="/goals">Goals</RouterLink>
     </nav>
-    <RouterView></RouterView>
+    <RouterView :onUser="handleUser"></RouterView>
   </div>
 </template>
 
@@ -16,6 +16,16 @@ import Header from './components/Header.vue';
 
 export default {
   name: 'app',
+  data() {
+    return {
+      user: null
+    }
+  },
+  methods: {
+    handleUser(user) {
+      this.user = user;
+    }
+  },
   components: {
     Header
   }

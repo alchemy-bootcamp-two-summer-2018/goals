@@ -34,9 +34,13 @@
 </template>
 
 <script>
+import { signUp, signIn } from '../services/api';
 import FormControl from './FormControl.vue';
 
 export default {
+  props: {
+    onUser: Function,
+  },
   data() {
     return {
       credentials: {
