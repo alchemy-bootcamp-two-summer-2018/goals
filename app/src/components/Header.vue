@@ -1,32 +1,58 @@
 <template>
     <header>
-    <img alt="Bacon" src="../assets/logo.png">
+    <img class="logo" alt="Bacon" src="../assets/logo.png">
     
     <div>
       <h1>Bacon</h1>
       <nav>
-        <router-link to="/">Home</router-link>
-        <router-link to="/about">About</router-link>
-        <router-link to="/auth">Sign Up</router-link>
-        <router-link to="/goals">Goals</router-link>
-        <router-link to="/users">Users</router-link>
+        <RouterLink to="/">Home</RouterLink>
+        <RouterLink to="/about">About</RouterLink>
+        <RouterLink v-if="user" to="/goals">Goals</RouterLink>
+        <RouterLink v-if="user" to="/users">Users</RouterLink>
+        <RouterLink v-if="!user" to="/auth">Sign In</RouterLink>
+        <a v-if="user" href="/" @click.prevent="handleSignOut">Sign Out</a>
       </nav>
+      <span v-if="user">user: {{ user.email }}</span>
     </div>
 
+    <img class="flag" alt="Murica" src="../assets/flag.png">
 
   </header>
 </template>
 
 <script>
-export default {
+import { checkForToken, signOut } from '../services/api';
 
+export default {
+  data() {
+    return {
+      user: null
+    };
+  },
+  created() {
+    this.user = checkForToken();
+  },
+  methods: {
+    handleUser(user) {
+      this.user = user;
+    },
+    handleSignOut() {
+      signOut();
+      this.user = null;
+      this.$router.push('/');
+    }
+  }
 };
 </script>
 
 <style scoped>
 
-img {
+img.logo {
   width: 200px;
+  height: 200px;
+}
+
+img.flag {
   height: 200px;
 }
 
@@ -38,7 +64,8 @@ a {
   margin: 15px;
   border: 1px solid black;
   text-decoration: none;
-  color: white;
+  color: black;
+  text-shadow: 1px 1px white;
   border-radius: 5px;
   box-shadow: 0.5px 0.5px 0.5px black;
   background-color: rgba(65,214,195,0);
@@ -46,7 +73,7 @@ a {
 }
 
 a:hover {
-  background-color: rgba(65,214,195,1);
+  background-color: #fea793;
   box-shadow: 0.9px 0.9px 0.9px black;
   border: 4px solid rgba(243, 221, 97, 0.582);
 }
@@ -59,8 +86,8 @@ h1 {
   height: 100px;
   margin: 5px 0px 0px 0px;
   text-transform: uppercase;
-  color: white;
-  text-shadow: 2px 2px black;
+  color: black;
+  text-shadow: 2px 2px white;
 }
 
 nav {
@@ -71,11 +98,11 @@ header {
   display: grid;
   grid-template-columns: 25% 50% 25%;
   box-shadow: 3px 2px 2px black;
-  background: rgb(90,170,250);
+  background: #fea793;
 }
 
 header:hover {
-  background: rgba(65,214,195,1);
+  background: #fff8ed;
 }
 
 </style>
