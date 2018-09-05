@@ -4,6 +4,7 @@ import Auth from './components/Auth.vue';
 import Goals from './components/Goals.vue';
 import Users from './components/Users.vue';
 
+
 export default new VueRouter({
   routes: [
     { path: '/', component: Home },

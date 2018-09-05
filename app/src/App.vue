@@ -6,7 +6,7 @@
       <nav>
         <router-link to="/">Go <strong>Home</strong></router-link>
         &nbsp;
-        <router-link to="/goals">Go to Goals</router-link>
+        <router-link v-if="user" to="/goals">Go to Goals</router-link>
         &nbsp;
         <router-link to="/users">Go to Users</router-link>
         &nbsp;

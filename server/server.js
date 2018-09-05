@@ -110,17 +110,18 @@ app.use((req, res, next) => {
 });
 
 // api data routes
-app.get('/api/celebrities', (req, res) => {
+app.get('/api/users', (req, res) => {
   client.query(`
     SELECT 
-      c.id,
-      c.name, 
-      f.id as "fameId",
-      f.name as occupation
-      FROM celebrities as c
-      JOIN famous as f
-      ON c.fame_id = f.id
-      ORDER BY c.name
+      g.id,
+      g.name,
+      g.description,
+      g.completed, 
+      u.id as "userId"
+      FROM goals g
+      JOIN users u
+      ON u.id = g.user_id
+      ORDER BY g.name
   `)
     .then(result => {
       res.send(result.rows);
@@ -128,20 +129,18 @@ app.get('/api/celebrities', (req, res) => {
     .catch(err => console.log(err));
 });
 
-app.get('/api/celebrities/:id', (req, res) => {
+app.get('/api/me/goals', (req, res) => {
   client.query(`
     SELECT 
       id,
       name,
-      fame_id as "fameId", 
-      gender,
-      age,
-      tool,
-      description
-    FROM celebrities
-    WHERE id = $1;
+      user_id as "userId", 
+      description,
+      completed
+    FROM goals
+    WHERE user_id = $1;
   `,
-  [req.params.id]
+  [req.userId]
   )
     .then(result => {
       res.send(result.rows[0]);
@@ -150,16 +149,16 @@ app.get('/api/celebrities/:id', (req, res) => {
   
 });
 
-app.post('/api/celebrities', (req, res) => {
+app.post('/api/me/goals', (req, res) => {
   console.log('posting');
   const body = req.body;
 
   client.query(`
-    INSERT INTO celebrities (name, fame_id, gender, age, tool, description)
-    VALUES ($1, $2, $3, $4, $5, $6)
-    RETURNING *;
+    INSERT INTO goals (user_id, name, description, completed)
+    VALUES ($1, $2, $3, $4)
+    RETURNING *, user_id as "userId";
   `,
-  [body.name, body.fameId, body.gender, body.age, body.tool, body.description]
+  [req.userID, body.name, body.description, body.completed]
   )
     .then(result => {
       res.send(result.rows[0]);
@@ -167,34 +166,22 @@ app.post('/api/celebrities', (req, res) => {
     .catch(err => console.log(err));
 });
 
-app.put('/api/celebrities/:id', (req, res) => {
+app.put('/api/me/goals', (req, res) => {
   const body = req.body;
 
   client.query(`
-    update celebrities
+    update goals
     set
       name = $1,
-      fame_id = $2,
-      gender = $3,
-      age = $4,
-      tool = $5,
-      description = $6
-    where id = $7
-    returning *;
+      description = $2,
+      completed = $3,
+    where id = $4,
+    and user_id = $5
+    returning *, user_id as "userId";
   `,
-  [body.name, body.fameId, body.gender, body.age, body.tool, body.description, req.params.id]
+  [body.name, body.description, body.completed, req.params.id, req.userId]
   ).then(result => {
     res.send(result.rows[0]);
-  });
-});
-
-app.delete('/api/celebrities/:id', (req, res) => {
-  client.query(`
-    delete from celebrities where id=$1;
-  `,
-  [req.params.id]
-  ).then(() => {
-    res.send({ removed: true });
   });
 });
 

@@ -1,6 +1,7 @@
 const URL = '/api';
-const GOALS_URL = `${URL}/neighborhoods`;
+const GOALS_URL = `${URL}/goals`;
 const AUTH_URL = `${URL}/auth`;
+const USERS_URL = `${URL}/users`;
 
 function responseHandler(response) {
   if(response.ok) return response.json();
@@ -63,3 +64,29 @@ export function checkForToken() {
   token = user.id;
   return user;
 }
+
+export function getGoals() {
+  return fetch(GOALS_URL, {
+    headers: getHeaders()
+  })
+    .then(responseHandler);
+}
+  
+export function addGoal(goal) {
+  return fetch(GOALS_URL, {
+    method: 'POST',
+    headers: getHeaders(),
+    body: JSON.stringify(goal)
+  })
+    .then(responseHandler);
+}
+  
+export function updateGoal(goal) {
+  return fetch(`${GOALS_URL}/${goal.id}`, {
+    method: 'PUT',
+    headers: getHeaders(),
+    body: JSON.stringify(goal)
+  })
+    .then(responseHandler);
+}
+

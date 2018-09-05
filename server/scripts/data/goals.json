@@ -1,0 +1,23 @@
+[
+    {
+      "name": "mack",
+      "user_id": 1,
+      "completed": false,
+      "description": "Do the thing"
+    },
+    { "name": "jim",
+      "user_id": 1,
+      "completed": false,
+      "description": "Do 2nd thing"
+    },
+    { "name": "bill",
+      "user_id": 2,
+      "completed": true,
+      "description": "Do that thing I already did"
+    },
+    { "name": "lauren",
+      "user_id": 2,
+      "completed": false,
+      "description": "Do the thing (#4)"
+    }
+  ]
