@@ -312,12 +312,13 @@ app.get('/api/users', (req, res, next) => {
 
   client.query(`
     select 
-      g.id, g.description, g.completed
+      g.id, g.description, g.completed, g.user_id, u.email
     from goals g
-    join users u
-    on u.id = g.user_id
-    group by g.id
-    order by g.id;
+    join users as u
+    on g.user_id = u.id
+    order by g.user_id;
+  ;
+
   `)
     .then(result => {
       res.send(result.rows);

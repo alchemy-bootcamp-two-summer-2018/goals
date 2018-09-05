@@ -49,7 +49,7 @@ export default {
 </script>
 
 <style>
-#app {
+/* #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -58,5 +58,5 @@ export default {
 }
 h1, nav {
     text-align: center;
-}
+} */
 </style>

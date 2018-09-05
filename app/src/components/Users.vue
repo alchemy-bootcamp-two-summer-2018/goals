@@ -1,22 +1,36 @@
 <template>
-  <div>
-    <h3>Neigborhoods List</h3>
-    <ul v-if="neighborhoods">
-      <li
-        v-for="neighborhood in neighborhoods"
-        :key="neighborhood.id"
-      >
-        <strong>{{ neighborhood.name }}</strong>
-        &nbsp;
-        {{ neighborhood.description }}
-      </li>
-    </ul>
-  </div>
+<section class="users">
+  <p v-if="!users">Loading users...</p>
+  <ul v-else class="list">
+    <User
+      v-for="(user, index) in users"
+      :key="index"
+      :user="user"
+    />
+  </ul>
+
+
+</section>
 </template>
 
 <script>
+import User from './User';
+import { getUsersandGoals } from '../services/api';
 export default {
-  props: ['neighborhoods']
+  data() {
+    return { 
+      users: null
+    };
+  },
+  created() {
+    getUsersandGoals()
+      .then(users => {
+        this.users = users;
+      });
+  },
+  components: { 
+    User,
+  },
 };
 </script>
 
