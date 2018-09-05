@@ -11,7 +11,7 @@ client.query(`
       id SERIAL PRIMARY KEY,
       user_id INTEGER NOT NULL REFERENCES users(id),
       description VARCHAR(1024),
-      completed VARCHAR(1024)
+      completed BOOLEAN
     );
 `)
   .then(

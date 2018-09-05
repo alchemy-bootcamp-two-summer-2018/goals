@@ -89,7 +89,7 @@ export function addGoal(goal) {
 }
 
 export function updateGoal(goal) {
-  return fetch(`${GOALS_URL}/${goal.id}`, {
+  return fetch(GOALS_URL, {
     method: 'PUT',
     headers: getHeaders(),
     body: JSON.stringify(goal)

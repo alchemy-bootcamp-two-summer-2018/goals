@@ -7,10 +7,10 @@
           v-model="edit.description">
       </FormControl>
 
-      <FormControl label="Completed">
+      <!-- <FormControl label="Completed">
         <input type="text" name="completed" placeholder="Completed" required
           v-model.number="edit.completed">
-      </FormControl>
+      </FormControl> -->
       
       <FormControl>
         <button type="submit">{{ label }}</button>
@@ -30,7 +30,7 @@ import FormControl from './FormControl';
 const initGoal = () => {
   return {
     description: '',
-    completed: ''
+    completed: false
     // userId: ''
   };
 };
@@ -56,6 +56,7 @@ export default {
   methods: {
     handleSubmit() {
       this.error = null;
+      console.log('inside add', this.edit);
       return this.onEdit(this.edit)
         // this fires when save is complete and data added to nieghborhoods array
         .then(() => {

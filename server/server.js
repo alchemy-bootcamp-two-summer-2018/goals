@@ -172,7 +172,7 @@ app.get('/api/users', (req, res, next) => {
     select 
       g.id, g.description, g.completed, g.user_id, u.email
     from goals g
-    join users as u
+    right join users as u
     on g.user_id = u.id
     order by g.user_id;
   ;

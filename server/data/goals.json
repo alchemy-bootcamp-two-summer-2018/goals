@@ -1,19 +1,19 @@
 
 [
     { "user_id": 1,
-      "completed": "yes",
+      "completed": true,
       "description": "Do the thing"
     },
     { "user_id": 2,
-      "completed": "no",
+      "completed": false,
       "description": "Do 2nd thing"
     },
     { "user_id": 1,
-      "completed": "yes",
+      "completed": true,
       "description": "Do that thing I already did"
     },
     { "user_id": 1,
-      "completed": "no",
+      "completed": false,
       "description": "Do the thing (#4)"
     }
   ]
