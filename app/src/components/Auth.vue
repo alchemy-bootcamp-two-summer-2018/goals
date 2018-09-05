@@ -34,9 +34,51 @@
 </template>
 
 <script>
-export default {
+import { signUp, signIn } from '../services/api';
+import FormControl from './FormControl';
 
-}
+export default {
+  props: {
+    onUser: Function
+  },
+  components: {
+    FormControl
+  },
+  data() {
+    return {
+      credentials: {
+        email: '',
+        password: ''
+      },
+      show: false,
+      type: 'signIn',
+      error: null
+    };
+  },
+  computed: {
+    isSignUp() {
+      return this.type === 'signUp';
+    },
+    label() {
+      return this.isSignUp ? 'Sign Up' : 'Sign In';
+    }
+  },
+  methods: {
+    handleSubmit() {
+      this.error = null;
+      const action = this.isSignUp ? signUp : signIn;
+      action(this.credentials)
+        .then(user => {
+          this.onUser(user);
+          this.$router.push('/');
+        })
+        .catch(err => {
+          this.error = err;
+        });
+    }
+  }
+};
+
 </script>
 
 <style>
