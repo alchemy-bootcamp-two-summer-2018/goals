@@ -1,4 +1,4 @@
-<template id="neighborhood-template">
+<template id="goal-template">
   <div class="form-control">
     <label>
       {{ label }}

@@ -6,7 +6,6 @@
       &nbsp;
       <NavLink to="/goals/new">add</NavLink>
     </nav>
-
     <RouterView 
       :goals="goals"
       :on-add="handleAdd"
@@ -16,14 +15,12 @@
 </template>
 
 <script>
-import { getGoals, addGoal } from '../services/api';
+import { addGoal } from '../services/api';
 import NavLink from './NavLink';
+import { getGoals } from '../services/api';
 export default {
-  components: {
-    NavLink
-  },
   data() {
-    return {
+    return { 
       goals: null
     };
   },
@@ -33,13 +30,15 @@ export default {
         this.goals = goals;
       });
   },
+  components: {
+    NavLink
+  },
   methods: {
     handleAdd(goal) {
-      goal.userId = this.goal.id;
       return addGoal(goal)
         .then(saved => {
           this.goals.push(saved);
-          this.$router.push('/goals');
+          this.$router.push('/goals/list');
         });
     }
   }

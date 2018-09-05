@@ -1,17 +1,17 @@
 <template>
   <section>
-    <NeighborhoodForm 
+    <GoalForm 
       label="Add"
       :on-edit="onAdd"/>
   </section>
 </template>
 
 <script>
-import NeighborhoodForm from './NeighborhoodForm.vue';
+import GoalForm from './GoalForm.vue';
 export default {
   props: ['onAdd'],
   components: { 
-    NeighborhoodForm
+    GoalForm
   }
 };
 </script>
