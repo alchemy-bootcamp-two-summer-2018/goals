@@ -25,9 +25,16 @@ app.post('/api/goals', (req, res, next) => {
     if(body.name === 'error') return next('bad name');
 
     client.query(`
-        insert into
-    `)
-})
+        insert into goals (name)
+        values ($1)
+        returning *;
+    `,
+    [body.name]
+    ).then(result => {
+        res.send(result.rows[0]);
+    })
+        .catch(next);
+});
 
 
 
