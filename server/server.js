@@ -138,7 +138,7 @@ app.put('/api/me/goals', (req, res, next) => {
     AND user_id = $4
     RETURNING *;
   `,
-  [body.name, body.completed, req.params.id, req.userId]  
+  [body.name, body.completed, body.id, req.userId]  
   ).then(result => {
     res.send(result.rows[0]);
   })
