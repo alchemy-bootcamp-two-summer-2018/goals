@@ -13,8 +13,7 @@ app.use(express.static('public'));
 
 const client = require('./db-client');
 
-const PORT = process.env.PORT;
-app.listen(PORT, () => console.log('server running on port', PORT));
+
 
 app.post('/api/auth/signup', (req, res) => {
   const body = req.body;
@@ -108,3 +107,22 @@ app.get('/api/me/goals', (req, res, next) => {
     })
     .catch(next);
 });
+
+app.post('/api/me/goals', (req, res, next) => {
+  const body = req.body;
+  if(body.name === 'error') return next('name was no good');
+
+  client.query(`
+    INSERT INTO goals (user_id, name, completed)
+    VALUES ($1, $2, $3)
+    RETURNING *;
+  `,
+  [req.userId, body.name, body.completed]
+  ).then(result => {
+    res.send(result.rows[0]);
+  })
+    .catch(next);
+});
+
+const PORT = process.env.PORT;
+app.listen(PORT, () => console.log('server running on port', PORT));
