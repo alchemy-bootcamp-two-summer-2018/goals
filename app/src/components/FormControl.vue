@@ -1,4 +1,4 @@
-<template id="goals-template">
+<template id="goal-template">
   <div class="form-control">
     <label>
       {{ label }}
