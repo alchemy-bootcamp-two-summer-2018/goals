@@ -53,7 +53,7 @@ img.logo {
 }
 
 img.flag {
-  height: 200px;
+  max-height: 200px;
 }
 
 a {
@@ -99,6 +99,7 @@ header {
   grid-template-columns: 25% 50% 25%;
   box-shadow: 3px 2px 2px black;
   background: #fea793;
+  justify-items: center;
 }
 
 header:hover {

@@ -1,12 +1,16 @@
 <template>
   <main>
-    <p>I'm all the goals!</p>
+    <NewGoal></NewGoal>
   </main>
 </template>
 
 <script>
-export default {
+import NewGoal from './NewGoal.vue';
 
+export default {
+  components: { 
+    NewGoal
+  }
 };
 </script>
 
