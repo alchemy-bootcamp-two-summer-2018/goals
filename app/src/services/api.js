@@ -1,5 +1,6 @@
 const URL = '/api';
-const GOALS_URL = `${URL}/goals`;
+const GOALS_URL = `${URL}/me/goals`;
+const USERS_URL = `${URL}/users`;
 const AUTH_URL = `${URL}/auth`;
 
 function responseHandler(response) {
@@ -65,7 +66,7 @@ export function checkForToken() {
 }
 
 export function getGoals() {
-  return fetch(`${URL}/goals`, {
+  return fetch(`${GOALS_URL}`, {
     headers: getHeaders()
   })
     .then(responseHandler);
@@ -76,6 +77,13 @@ export function addGoal(goal) {
     method: 'POST',
     headers: getHeaders(),
     body: JSON.stringify(goal)
+  })
+    .then(responseHandler);
+}
+
+export function getUsers() {
+  return fetch(`${USERS_URL}`, {
+    headers: getHeaders()
   })
     .then(responseHandler);
 }

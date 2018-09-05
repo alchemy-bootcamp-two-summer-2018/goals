@@ -7,11 +7,6 @@
           v-model="edit.goal">
       </FormControl>
 
-      <FormControl label="Status">
-        <input type="text" name="status" placeholder="Status" required
-          v-model.number="edit.status">
-      </FormControl>
-
       <FormControl>
         <button type="submit">{{ label }}</button>
       </FormControl>
@@ -25,8 +20,7 @@ import FormControl from './FormControl';
 
 const initGoal = () => {
   return {
-    goal: '',
-    status: ''
+    goal: ''
   };
 };
 

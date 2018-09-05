@@ -2,7 +2,7 @@
   <section>
     <GoalForm
       label="Add"
-      :on-edit="onAdd"/>
+      :onEdit="onAdd"/>
   </section>
 </template>
 
