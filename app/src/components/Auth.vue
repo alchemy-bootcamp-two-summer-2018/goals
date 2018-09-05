@@ -102,9 +102,7 @@ section {
   flex-direction: column;
   margin: auto;
 }
-h2 {
 
-}
 button {
   display: block;
 }
