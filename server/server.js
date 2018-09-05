@@ -115,16 +115,25 @@ app.get('/api/users', (req, res) => {
     SELECT 
       g.id,
       g.name,
+      g.user_id as "userId",
       g.description,
-      g.completed, 
-      u.id as "userId"
-      FROM goals g
-      JOIN users u
-      ON u.id = g.user_id
-      ORDER BY g.name
+      g.completed 
+      FROM goals g;
+
+      SELECT
+      u.id, 
+      u.email
+      FROM users u;
   `)
     .then(result => {
-      res.send(result.rows);
+      const goals = result[0].rows;
+      const users = result[1].rows;
+      users.forEach(user => {
+        user.goals = goals.filter(goal => {
+          return goal.userId === user.id;
+        });
+      });
+      res.send(users);
     })
     .catch(err => console.log(err));
 });
@@ -143,7 +152,7 @@ app.get('/api/me/goals', (req, res) => {
   [req.userId]
   )
     .then(result => {
-      res.send(result.rows[0]);
+      res.send(result.rows);
     })
     .catch(err => console.log(err));
   
