@@ -108,14 +108,14 @@ app.use((req, res, next) => {
 
 app.post('/api/goals', (req, res, next) => {
   const body = req.body;
+  console.log(body)
   if(body.name === 'error') return next('bad name');
-
   client.query(`
-    insert into goals (user_id, name)
-    values ($1, $2)
+    INSERT INTO goals (user_id, name, completed)
+    VALUES ($1, $2, $3)
     returning *;
   `,
-  [req.userId, body.name]
+  [req.userId, body.name, body.completed]
   ).then(result => {
     res.send(result.rows[0]);
   })
@@ -147,7 +147,7 @@ app.post('/api/goals', (req, res, next) => {
 
 app.get('/api/goals', (req, res, next) => {
   client.query(`
-    SELECT name
+    SELECT name, completed
     FROM goals
     WHERE user_id = $1;
   `,
@@ -164,3 +164,14 @@ app.get('/api/goals', (req, res, next) => {
 
 const PORT = process.env.PORT;
 app.listen(PORT, () => console.log('server humming along on port', PORT));
+
+
+// May need left or right join to show all of the users and their goals including those who have no goals.
+
+//can do two select statements at once.
+
+//SELECT xyz
+//FROM abc;
+
+//SELECT efg
+//FROM hij;

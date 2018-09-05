@@ -17,7 +17,8 @@ import FormControl from './FormControl.vue';
 
 const initGoal = () => {
     return {
-        name: ''
+        name: '',
+        completed: false
     }
 }
 export default {

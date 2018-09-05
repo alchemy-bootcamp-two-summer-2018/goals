@@ -9,6 +9,7 @@
     "drop-tables": "node scripts/drop-tables.js",
     "recreate-tables": "npm run drop-tables && npm run create-tables",
     "seed-data": "node scripts/seed-data.js",
+    "start:watch": "nodemon server.js",
     "start": "node server.js"
   },
   "author": "Mike Lambert",

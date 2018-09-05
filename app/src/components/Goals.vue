@@ -4,14 +4,17 @@
       <li v-for="goal in goals"
         :key="goal.id">
         {{ goal.name }}
+        <button @click="handleComplete">Complete</button>
       </li>
     </ul>
     <AddGoals :on-add="handleAdd"/>
+    <GoalComplete :goals="goals"/>
   </div>
 </template>
 
 <script>
 import AddGoals from './AddGoals.vue';
+import GoalComplete from './GoalComplete.vue';
 import { addGoal, getGoals }from '../services/api';
 export default {
   props: {
@@ -19,7 +22,7 @@ export default {
   },
   data() {
     return {
-      goals: null
+      goals: null,
     }
   },
   created() {
@@ -32,14 +35,19 @@ export default {
       })
   },
   components: {
-    AddGoals
+    AddGoals,
+    GoalComplete
   },
   methods: {
     handleAdd(goal) {
+      console.log(goal.completed)
       return addGoal(goal)
         .then(saved => {
           this.goals.push(saved);
         })
+    },
+    handleComplete() {
+
     }
   }
 
@@ -47,5 +55,7 @@ export default {
 </script>
 
 <style>
-
+ul {
+  list-style: none;
+}
 </style>
