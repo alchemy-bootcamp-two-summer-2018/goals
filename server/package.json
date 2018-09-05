@@ -12,8 +12,7 @@
     "lint": "eslint .",
     "pretest": "npm run lint",
     "test": "exit 0",
-    "start:watch": "nodemon server.js",
-    "start": "node server.js"
+    "start": "nodemon server.js"
   },
   "author": "Jack Toumey <jack@toumey.io>",
   "license": "ISC",
