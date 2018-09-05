@@ -20,23 +20,6 @@ app.use(express.static('public'));
 // connect to the database
 const client = require('./db-client');
 
-app.post('/api/goals', (req, res, next) => {
-  const body = req.body;
-  if(body.name === 'error') return next('bad name');
-
-  client.query(`
-    insert into goals (name)
-    values ($1)
-    returning *;
-  `,
-  [body.name]
-  ).then(result => {
-    res.send(result.rows[0]);
-  })
-    .catch(next);
-});
-
-
 app.post('/api/auth/signup', (req, res) => {
   const body = req.body;
   const email = body.email;
@@ -121,6 +104,59 @@ app.use((req, res, next) => {
   // 2. call next()
   next();
 });
+
+
+app.post('/api/goals', (req, res, next) => {
+  const body = req.body;
+  if(body.name === 'error') return next('bad name');
+
+  client.query(`
+    insert into goals (user_id, name)
+    values ($1, $2)
+    returning *;
+  `,
+  [req.userId, body.name]
+  ).then(result => {
+    res.send(result.rows[0]);
+  })
+    .catch(next);
+});
+
+
+// app.get('/api/goals', (req, res, next) => {
+//   const goalPromise = client.query(`
+//     SELECT name
+//     FROM goals
+//     WHERE user_id = $1;
+//   `,
+//   [req.userId]);
+
+//   Promise.all(goalPromise)
+//     .then(promiseValues => {
+//       const goalResult = proviseValues[0];
+//       if(goalResult.rows.length ===0) {
+//         res.sendStatus(404);
+//         return;
+//       }
+
+//       const goal = goalResult.rows[0];
+//       res.send(goal);
+//     })
+//     .catch(next);
+// })
+
+app.get('/api/goals', (req, res, next) => {
+  client.query(`
+    SELECT name
+    FROM goals
+    WHERE user_id = $1;
+  `,
+  [req.userId])
+    .then(result => {
+      res.send(result.rows);
+    })
+    .catch(next);
+})
 
 
 

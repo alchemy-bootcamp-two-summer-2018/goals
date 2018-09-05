@@ -3,19 +3,19 @@ const GOALS_URL = `${URL}/goals`;
 const AUTH_URL = `${URL}/auth`;
 
 function responseHandler(response) {
-    if(response.ok) return response.json();
-    return response.json().then(body => { 
-      throw body.error; 
-    });
-  }
+  if(response.ok) return response.json();
+  return response.json().then(body => { 
+    throw body.error; 
+  });
+}
 
   let token = '';
 
-  function getHeaders() {
-    const headers = { 'Content-type': 'application/json' };
-    if(token) headers['Authorization'] = token;
-    return headers;
-  }
+function getHeaders() {
+  const headers = { 'Content-type': 'application/json' };
+  if(token) headers['Authorization'] = token;
+  return headers;
+}
 
 export function addGoal(goal) {
   return fetch(GOALS_URL, {
@@ -24,6 +24,13 @@ export function addGoal(goal) {
     body: JSON.stringify(goal)
   })
     .then(responseHandler);   
+}
+
+export function getGoals() {
+  return fetch(GOALS_URL, {
+    headers: getHeaders()
+  })
+    .then(responseHandler);
 }
 
 export function signUp(credentials) {
@@ -55,4 +62,20 @@ export function signIn(credentials) {
 function storeUser(user) {
   token = user.id;
   window.localStorage.setItem('user', JSON.stringify(user));
+}
+
+export function signOut() {
+  token = '';
+  window.localStorage.removeItem('user');
+}
+
+export function checkForToken() {
+  const json = window.localStorage.getItem('user');
+  if(!json) {
+    return null;
+  }
+
+  const user = JSON.parse(json);
+  token = user.id;
+  return user;
 }

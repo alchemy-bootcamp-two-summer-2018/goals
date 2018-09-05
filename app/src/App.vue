@@ -5,13 +5,17 @@
       <RouterLink class="nav-link" to="/">Home</RouterLink>
       <RouterLink v-if="!user" class="nav-link" to="/auth">Sign In</RouterLink>
       <RouterLink v-if="user" class="nav-link" to="/goals">Goals</RouterLink>
+      <a v-if="user" href="/" @click.prevent="handleSignOut">Sign Out</a>
     </nav>
+    <span v-if="user">user: {{ user.email }}</span>
     <RouterView :onUser="handleUser"></RouterView>
+
   </div>
 </template>
 
 <script>
 
+import { checkForToken, signOut } from './services/api';
 import Header from './components/Header.vue';
 
 export default {
@@ -19,11 +23,19 @@ export default {
   data() {
     return {
       user: null
-    }
+    };
+  },
+  created() {
+    this.user = checkForToken();
   },
   methods: {
     handleUser(user) {
       this.user = user;
+    },
+    handleSignOut() {
+      signOut();
+      this.user = null;
+      this.$router.push('/');
     }
   },
   components: {

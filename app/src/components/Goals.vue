@@ -1,7 +1,10 @@
 <template>
   <div>
-    <ul>
-      <li>Hello World</li>
+    <ul v-if="goals">
+      <li v-for="goal in goals"
+        :key="goal.id">
+        {{ goal.name }}
+      </li>
     </ul>
     <AddGoals :on-add="handleAdd"/>
   </div>
@@ -9,7 +12,7 @@
 
 <script>
 import AddGoals from './AddGoals.vue';
-import { addGoal }from '../services/api';
+import { addGoal, getGoals }from '../services/api';
 export default {
   props: {
 
@@ -17,8 +20,17 @@ export default {
   data() {
     return {
       goals: null
-        }
-    },
+    }
+  },
+  created() {
+    getGoals() 
+      .then(goals => {
+        this.goals = goals;
+      })
+      .catch(err => {
+        this.error = err;
+      })
+  },
   components: {
     AddGoals
   },
