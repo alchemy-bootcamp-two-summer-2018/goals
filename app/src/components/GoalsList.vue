@@ -1,6 +1,7 @@
 <template>
   <div>
     <h3>Goals List</h3>
+    <NewGoal/>
     <div v-if="goals">
       <p
         v-for="goal in goals"

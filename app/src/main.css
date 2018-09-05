@@ -1,0 +1,12 @@
+@import url('https://fonts.googleapis.com/css?family=Amatic+SC|Raleway:200');
+
+h1,
+h2,
+h3 {
+  font-family: 'Amatic SC', sans-serif;
+}
+
+p,
+input {
+  font-family: 'Raleway', sans-serif;
+}

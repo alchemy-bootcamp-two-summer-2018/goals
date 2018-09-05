@@ -1,18 +1,23 @@
 <template>
   <div id="app">
     <header>
-      <h1>Goals</h1>
-
-      <nav>
-        <RouterLink to="/">Go to <strong>Home</strong></RouterLink>
-        &nbsp;
-        <RouterLink to="/goals">Go to Goals</RouterLink>
-        &nbsp;
-        <RouterLink v-if="!user" to="/auth">Sign In</RouterLink>
-        &nbsp;
-        <a v-if="user" href="/" @click.prevent="handleSignOut">Sign Out</a>
-      </nav>
-
+        <nav>
+          <div class="links1">
+            <RouterLink class="nav-link" to="/">Home</RouterLink>
+            &nbsp;
+            <RouterLink class="nav-link" to="/goals">Goals</RouterLink>
+            &nbsp;
+          </div>
+          <div class="logo">
+            <img src="http://inspower.co/wp-content/uploads/2015/11/do-what-you-love-cg.jpg" alt="Do what you love. Love what you do.">
+          </div>
+          <div class="links2">
+            <RouterLink v-if="!user" to="/auth" class="nav-link">Sign In</RouterLink>
+            &nbsp;
+            <a v-if="user" class="nav-link" href="/" @click.prevent="handleSignOut">Sign Out</a>
+            <a class="nav-link">About</a>
+          </div>
+        </nav>
       <span v-if="user">user: {{ user.email }}</span>
     </header>
 
@@ -46,16 +51,41 @@ export default {
 };
 </script>
 
-<style>
-#app {
+<style scoped>
+/* #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
   margin-top: 60px;
+} */
+
+nav {
+  display: flex;
+  width: 100vw;
+  justify-content: space-around;
 }
 
-h1, nav {
-  text-align: center;
+nav div {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
 }
+
+nav img {
+  height: 300px;
+}
+
+.links1,
+.links2 {
+  flex-grow: 2;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: black;
+  font-family: 'Amatic SC', sans-serif;
+  font-size: 40px;
+}
+
 </style>
