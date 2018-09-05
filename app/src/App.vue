@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <Header/>
-    <router-view></router-view>
+    <router-view :onUser="handleUser"></router-view>
     <Footer/>
   </div>
 </template>
@@ -9,14 +9,31 @@
 <script>
 import Header from './components/Header.vue';
 import Footer from './components/Footer.vue';
-import api from './services/api';
+import { checkForToken, signOut } from './services/api';
 
 export default {
   name: 'app',
   components: {
     Header, Footer
   },
-
+  data() {
+    return {
+      user: null
+    };
+  },
+  created() {
+    this.user = checkForToken();
+  },
+  methods: {
+    handleUser(user) {
+      this.user = user;
+    },
+    handleSignOut() {
+      signOut();
+      this.user = null;
+      this.$router.push('/');
+    }
+  }
 
 
 };
