@@ -52,23 +52,24 @@ app.post('/api/auth/signup', (req, res) => {
     });
 });
 
+
 app.post('/api/auth/signin', (req, res) => {
   const body = req.body;
   const email = body.email;
   const password = body.password;
-
+  
   if(!email || !password) {
     res.status(400).send({
       error: 'Please enter an email and password.'
     });
     return;
   }
-
+  
   client.query(`
-    SELECT id, email, password
+  SELECT id, email, password
     FROM users
     WHERE email = $1
-  `,
+    `,
   [email]
   )
     .then(results => {
@@ -82,4 +83,28 @@ app.post('/api/auth/signin', (req, res) => {
         email: row.email
       });
     });
+});
+
+app.use((req, res, next) => {
+  const id = req.get('Authorization');
+  if(!id) {
+    res.status(403).send({
+      error: 'No token found'
+    });
+    return;
+  }
+  req.userId = id;
+  next();
+});
+
+app.get('/api/me/goals', (req, res, next) => {
+  client.query(`
+    SELECT * FROM goals
+    WHERE user_id = $1;     
+  `,
+  [req.userId])
+    .then(results => {
+      res.send(results.rows);
+    })
+    .catch(next);
 });
