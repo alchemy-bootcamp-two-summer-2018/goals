@@ -4,7 +4,7 @@
       :onSignOut="handleSignOut"
       :user="user"
     />
-    <router-view :onUser="handleUser"></router-view>
+    <router-view :onUser="handleUser" :user="user"></router-view>
     <Footer/>
   </div>
 </template>
