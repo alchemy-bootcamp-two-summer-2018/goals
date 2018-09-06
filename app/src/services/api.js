@@ -64,6 +64,7 @@ export function signIn(credentials) {
     .then(responseHandler)
     .then(user => {
       storeUser(user);
+      // console.log(user);
       return user;
     });
 }

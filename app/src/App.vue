@@ -14,7 +14,7 @@
       </nav>
     </header>
 
-    <router-view></router-view>
+    <RouterView :onUser="handleUser"></RouterView>
   </div>
 </template>
 

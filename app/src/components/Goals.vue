@@ -1,4 +1,7 @@
 <template>
+  <ul>
+    These are some goals. wow. go get 'em
+  </ul>
     
 </template>
 

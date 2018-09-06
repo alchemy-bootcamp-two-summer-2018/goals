@@ -11,6 +11,7 @@ export default new VueRouter({
     { path: '/auth', component: Auth },
     { path: '/goals', component: Goals },
     { path: '/goals/add', component: AddGoal },
-    { path: '/users', component: Users }
+    { path: '/users', component: Users },
+    { path: '*', redirect: '/' }
   ]
 });
