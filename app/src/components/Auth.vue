@@ -77,7 +77,6 @@ export default {
       action(this.credentials)
         .then(user => {
           this.onUser(user);
-          console.log('form submitted', user);
           this.$router.push('/');
         })
         .catch(err => {
