@@ -1,4 +1,5 @@
 const URL = '/api';
+const GOALS_URL = `${URL}/goals`;
 const AUTH_URL = `${URL}/auth`;
 
 function responseHandler(response) {
@@ -15,9 +16,27 @@ function getHeaders() {
   if(token) headers['Authorization'] = token;
   return headers;
 }
-
+export function getGoals() {
+  return fetch(GOALS_URL, {
+    headers: getHeaders()
+  })
+    .then(responseHandler);
+}
+export function getUsers() {
+  return fetch(`${URL}/users`, {
+    headers: getHeaders()
+  })
+    .then(responseHandler);
+}
+export function getUser(id) {
+  return fetch(`${URL}/users/${id}`, {
+    headers: getHeaders()
+  })
+    .then(responseHandler);
+}
+  
 export function signUp(credentials) {
-  return fetch(`${AUTH_URL}/signup`, {
+  return fetch(`${AUTH_URL}/signUp`, {
     method: 'POST',
     headers: getHeaders(),
     body: JSON.stringify(credentials)
@@ -30,7 +49,7 @@ export function signUp(credentials) {
 }
   
 export function signIn(credentials) {
-  return fetch(`${AUTH_URL}/signin`, {
+  return fetch(`${AUTH_URL}/signIn`, {
     method: 'POST',
     headers: getHeaders(),
     body: JSON.stringify(credentials)

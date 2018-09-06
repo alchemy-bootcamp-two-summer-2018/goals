@@ -4,8 +4,6 @@
       <nav>
         <RouterLink to="/">Go Home</RouterLink>
         &nbsp;
-        <RouterLink to="/about">Go to About</RouterLink>
-        &nbsp;
         <RouterLink v-if="user" to="/goals">Go to Goals</RouterLink>
         &nbsp;
         <RouterLink v-if="!user" to="/auth">Sign In</RouterLink>
@@ -16,11 +14,12 @@
       <span v-if="user">user: {{ user.email }}</span>
     </header> 
 
-    <RouterView :onUser="handUser"/>
+    <RouterView :onUser="handleUser"/>
     </div>
 </template>
 
 <script>
+import { checkForToken, signOut } from './services/api';
 
 export default {
   data() {
@@ -28,9 +27,17 @@ export default {
       user: null
     };
   },
+  created() {
+    this.user = checkForToken();
+  },
   methods: {
     handleUser(user) {
       this.user = user;
+    },
+    handleSignOut() {
+      signOut();
+      this.user = null;
+      this.$router.push('/');
     }
   }
 };

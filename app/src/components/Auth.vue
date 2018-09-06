@@ -1,7 +1,7 @@
 <template>
     <div>
     <h2>{{ label }}</h2>
-    <button @ click="type = isSignUp ? 'SignIn' : 'signUp'">
+    <button @click="type = isSignUp ? 'SignIn' : 'signUp'">
         {{
         isSignUp
           ? "Already a user? Click here to sign in"
@@ -62,6 +62,13 @@ export default {
     },
     label() {
       return this.isSignUp ? 'Sign Up' : 'Sign In';      
+    }
+  },
+  watch: {
+    type(newType, oldType) {
+      if(newType !== oldType) {
+        this.error = null;
+      }
     }
   },
   methods: {

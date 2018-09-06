@@ -15,78 +15,78 @@ app.use(express.json());
 app.use(express.static('public'));
 
 // connect to the database
-//const client = require('./db-client');
+const client = require('./db-client');
 
 // auth routes
 
-// app.post('/api/auth/signup', (req, res) => {
-//   const body = req.body;
-//   const email = body.email;
-//   const password = body.password;
+app.post('/api/auth/signup', (req, res) => {
+  const body = req.body;
+  const email = body.email;
+  const password = body.password;
 
-//   if(!email || !password) {
-//     res.status(400).send({
-//       error: 'email and password are required'
-//     });
-//     return;
-//   }
+  if(!email || !password) {
+    res.status(400).send({
+      error: 'email and password are required'
+    });
+    return;
+  }
 
-//   client.query(`
-//     select count(*)
-//     from users
-//     where email = $1
-//   `,
-//   [email])
-//     .then(results => {
-//       if(results.rows[0].count > 0) {
-//         res.status(400).send({ error: 'email already in use' });
-//         return;
-//       }
+  client.query(`
+    select count(*)
+    from users
+    where email = $1
+  `,
+  [email])
+    .then(results => {
+      if(results.rows[0].count > 0) {
+        res.status(400).send({ error: 'email already in use' });
+        return;
+      }
 
-//       client.query(`
-//         insert into users (email, password)
-//         values ($1, $2)
-//         returning id, email
-//       `,
-//       [email, password])
-//         .then(results => {
-//           res.send(results.rows[0]);
-//         });
-//     });
+      client.query(`
+        insert into users (email, password)
+        values ($1, $2)
+        returning id, email
+      `,
+      [email, password])
+        .then(results => {
+          res.send(results.rows[0]);
+        });
+    });
 
-// });
+});
 
-// app.post('/api/auth/signin', (req, res) => {
-//   const body = req.body;
-//   const email = body.email;
-//   const password = body.password;
+app.post('/api/auth/signIn', (req, res) => {
+  const body = req.body;
+  const email = body.email;
+  const password = body.password;
 
-//   if(!email || !password) {
-//     res.status(400).send({
-//       error: 'email and password are required'
-//     });
-//     return;
-//   }
+  if(!email || !password) {
+    res.status(400).send({
+      error: 'email and password are required'
+    });
+    return;
+  }
 
-//   client.query(`
-//     select id, email, password
-//     from users
-//     where email = $1
-//   `,
-//   [email]
-//   )
-//     .then(results => {
-//       const row = results.rows[0];
-//       if(!row || row.password !== password) {
-//         res.status(401).send({ error: 'invalid email or password' });
-//         return;
-//       }
-//       res.send({ 
-//         id: row.id,
-//         email: row.email
-//       });
-//     });
-// });
+  client.query(`
+    select id, email, password
+    from users
+    where email = $1
+  `,
+  [email]
+  )
+    .then(results => {
+      const row = results.rows[0];
+      if(!row || row.password !== password) {
+        res.status(401).send({ error: 'invalid email or password' });
+        return;
+      }
+      res.send({ 
+        id: row.id,
+        email: row.email
+      });
+    });
+});
 
 // app.use((req, res, next) => {
 //   // is there a Authorization header?

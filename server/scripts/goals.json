@@ -1,0 +1,16 @@
+[
+    {
+      "name": "Travel",
+      "goal_id": 1,
+      "population": 1337,
+      "founded": "2017",
+      "description": "Sovereign neighborhood in the heart of Portland"
+    },
+    {
+      "name": "Eats",
+      "goal_id": 2,
+      "population": 232,
+      "founded": "232",
+      "description": "Look to the clouds"
+    }
+  ]
