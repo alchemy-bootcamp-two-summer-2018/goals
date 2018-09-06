@@ -37,6 +37,7 @@ export default {
 .current-user {
   font-weight: bolder;
   display: inline-block;
+  width: 140px;
   font-size: 22px;
   padding: 5px;
   margin: 10px;
@@ -99,6 +100,16 @@ header {
 
 header:hover {
   background: #fff8ed;
+}
+
+
+@media screen and (max-width: 480px) {
+
+    header {
+    display: flex;
+    flex-direction:column;
+    width: 100%;
+    }
 }
 
 </style>
