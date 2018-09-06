@@ -31,7 +31,6 @@ export default {
     getUsers()
       .then(users => {
         this.users = users;
-        console.log('users', this.users);
       });
   }
 };
