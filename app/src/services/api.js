@@ -18,7 +18,7 @@ function getHeaders() {
 }
 
 export function getGoals() {
-  return fetch(GOALS_URL, {
+  return fetch(`${GOALS_URL}/me`, {
     headers: getHeaders()
   })
     .then(responseHandler);
@@ -64,7 +64,6 @@ export function signIn(credentials) {
     .then(responseHandler)
     .then(user => {
       storeUser(user);
-      // console.log(user);
       return user;
     });
 }

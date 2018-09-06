@@ -13,8 +13,6 @@ app.use(express.static('public'));
 
 const client = require('./db-client');
 
-
-
 app.post('/api/auth/signup', (req, res) => {
   const body = req.body;
   const email = body.email;
@@ -96,7 +94,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get('/api/me/goals', (req, res, next) => {
+app.get('/api/goals/me', (req, res, next) => {
   client.query(`
     SELECT * FROM goals
     WHERE user_id = $1;     
@@ -108,7 +106,7 @@ app.get('/api/me/goals', (req, res, next) => {
     .catch(next);
 });
 
-app.post('/api/me/goals', (req, res, next) => {
+app.post('/api/goals/me', (req, res, next) => {
   const body = req.body;
   if(body.name === 'error') return next('name was no good');
 
@@ -127,7 +125,7 @@ app.post('/api/me/goals', (req, res, next) => {
 const PORT = process.env.PORT;
 app.listen(PORT, () => console.log('server running on port', PORT));
 
-app.put('/api/me/goals', (req, res, next) => {
+app.put('/api/goals/me', (req, res, next) => {
   const body = req.body;
   client.query(`
     UPDATE goals

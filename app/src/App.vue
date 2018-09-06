@@ -2,7 +2,6 @@
   <div id="app">
     <header>
       <h1>#goals</h1>
-
       <nav>
         <RouterLink to="/">Home</RouterLink>
         &nbsp;

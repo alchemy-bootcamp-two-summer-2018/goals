@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Time to Auth it up, homey</h1>
+    <h1>Auth</h1>
     <button @click="type = isSignUp ? 'signIn' : 'signUp'">
       {{
         isSignUp
