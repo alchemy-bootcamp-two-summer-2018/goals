@@ -65,9 +65,9 @@ export default {
 
 <style>
 .goal-form {
-  width: 300px;
+  width: 20%;
   margin: 0 auto;
-  text-align: center;
+  text-align: left;
 }
 
 label {

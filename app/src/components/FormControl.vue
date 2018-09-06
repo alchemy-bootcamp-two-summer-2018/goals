@@ -24,6 +24,7 @@ export default {
 label {
   display: block;
   font-weight: bolder;
+  font-size: 12px;
   margin-top: 10px;
 }
 

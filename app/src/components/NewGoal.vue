@@ -1,5 +1,5 @@
 <template>
-  <section class="goal-form">
+  <section>
     <GoalForm 
       label="Add"
       :on-edit="onAdd"/>
@@ -17,8 +17,5 @@ export default {
 </script>
 
 <style>
-.goal-form {
-  width: 300px;
-  text-align: center;
-}
+
 </style>

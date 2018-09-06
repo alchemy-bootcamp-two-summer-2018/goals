@@ -60,9 +60,30 @@ export default {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+@media screen and (max-width: 600px) {
+    .nav {
+    display: flex;
+    flex-direction:column;
+    width:100%;
+    margin: 0;
+    }
+
+    a{
+      background-color:#E6FDFF;
+      color: black;
+      border: 1px solid black;
+      padding: 3px;
+      text-decoration: none;
+    }
 }
 
 header {
+    background-color: black;
+    color: white;
     text-align: center;
 }
 

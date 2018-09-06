@@ -36,7 +36,9 @@ export default {
 
 <style scoped>
 .list {
-  text-align: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  text-align: left;
   list-style-type: none;
 }
 </style>

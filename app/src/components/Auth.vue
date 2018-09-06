@@ -91,7 +91,9 @@ export default {
 
 <style scoped>
 .auth-form {
-  text-align: center;
+  width: 200px;
+  margin: 0 auto;
+  text-align: left;
 }
 
 .password {
