@@ -7,7 +7,7 @@
     <p class="center">
       <img src="../assets/bacon.gif" />
     </p>
-    <p class="center">
+    <p class="center" v-if="!user">
       Click <router-link to="/auth">here</router-link> to sign in!
     </p>
   </main>
@@ -18,6 +18,10 @@
 
 
 export default {
+
+  props: {
+    user: Object,
+  },
 
   data() {
     return {
@@ -49,8 +53,20 @@ p {
   margin: 10px auto;
 }
 
-image {
-  width: 700px;
+img {
+  width: 100%;
+}
+
+@media screen and (max-width: 480px) {
+
+    p {
+    width: 50%;
+    }
+
+    h2 {
+      margin: 5% 10%;
+    }
+    
 }
 
 </style>

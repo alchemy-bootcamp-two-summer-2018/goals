@@ -39,4 +39,16 @@ p {
   margin: 10px auto;
 }
 
+@media screen and (max-width: 480px) {
+
+    p {
+    width: 50%;
+    }
+
+    h2 {
+      margin: 5% 10%;
+    }
+    
+}
+
 </style>
