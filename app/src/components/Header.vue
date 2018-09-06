@@ -83,7 +83,7 @@ img.logo {
   border: 4px solid #ffd90000;
 }
 
-.nav:hover {
+a.nav:hover {
   background-color: #fea793;
   box-shadow: 0.9px 0.9px 0.9px black;
   border: 4px solid rgba(243, 221, 97, 0.582);
