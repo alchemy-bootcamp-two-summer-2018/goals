@@ -1,14 +1,11 @@
 <template>
     <div>
-        <p>
-      Click <router-link to="/goals">here</router-link> to get started!
-    </p>
-    <!-- <p>Goals in <router-link to="/goals/1">Goals!</router-link>! -->
     <ul>
         <li
             v-for="goal in goals"
             :key="goal.id"
         >
+          {{ goal.name }} {{ goal.user_id }} 
         </li>
     </ul>
     </div>

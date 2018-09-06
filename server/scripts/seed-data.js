@@ -3,7 +3,6 @@ require('dotenv').config();
 const client = require('../db-client');
 const users = require('./users.json');
 const goals = require('./goals.json');
-// const neighborhoods = require('./neighborhoods.json');
 
 Promise.all(
   users.map(user => {

@@ -1,6 +1,8 @@
 <template>
   <div>
-    <h1>This is home</h1>
+        <p>
+      Click <router-link to="/users">here</router-link> to get started!
+      </p>
   </div>
 </template>
 

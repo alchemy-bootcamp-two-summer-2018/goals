@@ -111,8 +111,8 @@ app.get('/api/goals', (req, res, next) => {
   client.query(`
     select id, 
       name, 
-      user_id as "userId",
-      complete
+      complete,
+      user_id as "userId" 
     FROM goals
     order by name;
   `).then(result => {
@@ -122,38 +122,11 @@ app.get('/api/goals', (req, res, next) => {
 
 });
 
-app.post('/api/auth/signin', (req, res) => {
-  const body = req.body;
-  const email = body.email;
-  const password = body.password;
 
-  if(!email || !password) {
-    res.status(400).send({
-      error: 'email and password required'
-    });
-    return;
-  }
-  
-  client.query(`
-  select id, email, password
-  from users
-  where email = $1
-  `,
-  [email]
-  )
-    .then(results => {
-      const row = results.rows[0];
-      if(!row || row.password !== password) {
-        res.status(401).send({ error: 'invalid email or password' });
-        return;
-      }
-      res.send({ 
-        id: row.id,
-        email: row.email
-      });
-    });
-});
- 
+// app.put('/api/dogs/:id', (req, res, next) => {
+//   const body = req.body;
+
+//   client.query(`
 //     update dogs
 //     set
 //       name = $1,
