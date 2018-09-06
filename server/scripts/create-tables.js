@@ -12,7 +12,7 @@ client.query(`
       description VARCHAR(1024)
     )
 `)
-.then(
+  .then(
     () => console.log('create tables complete'),
     err => console.log(err)
   )
