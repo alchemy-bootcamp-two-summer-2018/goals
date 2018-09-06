@@ -106,53 +106,54 @@ app.post('/api/auth/signIn', (req, res) => {
 // });
 
 // api data routes
-// app.get('/api/goals', (req, res, next) => {
+app.get('/api/goals', (req, res, next) => {
 
-//   client.query(`
-//     select id, 
-//       goal, 
-//       complete,
-//       user_id as "userId", 
-//     FROM goals
-//     order by name;
-//   `).then(result => {
-//     res.send(result.rows);
-//   })
-//     .catch(next);
+  client.query(`
+    select id, 
+      name, 
+      user_id as "userId",
+      complete
+    FROM goals
+    order by name;
+  `).then(result => {
+    res.send(result.rows);
+  })
+    .catch(next);
 
-// });
+});
 
 app.post('/api/auth/signin', (req, res) => {
-   const body = req.body;
-   const email = body.email;
-   const password = body.password;
+  const body = req.body;
+  const email = body.email;
+  const password = body.password;
 
-   if(!email || !password) {
+  if(!email || !password) {
     res.status(400).send({
       error: 'email and password required'
     });
     return;
   }
-
-//   if(body.name === 'error') return next('bad name');
   
-//   client.query(`
-//     insert into dogs (user_id, name, personality_id, weight, age)
-//     values ($1, $2, $3, $4, $5)
-//     returning *, personality_id as "personalityId";
-//   `,
-//   [req.userId, body.name, body.personalityId, body.weight, body.age]
-//   ).then(result => {
-//     // send back object
-//     res.send(result.rows[0]);
-//   })
-//     .catch(next);
-// });
-
-// app.put('/api/dogs/:id', (req, res, next) => {
-//   const body = req.body;
-
-//   client.query(`
+  client.query(`
+  select id, email, password
+  from users
+  where email = $1
+  `,
+  [email]
+  )
+    .then(results => {
+      const row = results.rows[0];
+      if(!row || row.password !== password) {
+        res.status(401).send({ error: 'invalid email or password' });
+        return;
+      }
+      res.send({ 
+        id: row.id,
+        email: row.email
+      });
+    });
+});
+ 
 //     update dogs
 //     set
 //       name = $1,

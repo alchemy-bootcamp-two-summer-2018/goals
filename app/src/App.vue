@@ -4,7 +4,7 @@
       <nav>
         <RouterLink to="/">Go Home</RouterLink>
         &nbsp;
-        <RouterLink v-if="user" to="/goals">Go to Goals</RouterLink>
+        <RouterLink to="/goals">Go to Goals</RouterLink>
         &nbsp;
         <RouterLink v-if="!user" to="/auth">Sign In</RouterLink>
         &nbsp;

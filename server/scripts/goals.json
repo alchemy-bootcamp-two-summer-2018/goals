@@ -1,32 +1,32 @@
 [
     {
-      "goal": "Visit friend in Egypt",
+      "name": "Visit friend in Egypt",
       "user_id": 1,
       "complete": false
     },
     {
-        "goal": "Graduate from college",
+        "name": "Graduate from college",
         "user_id": 2,
         "complete": true
     },
     {
-        "goal": "Swim with Manta Rays",
-        "user_id": 3,
+        "name": "Swim with Manta Rays",
+        "user_id": 1,
         "complete": true
     },
     {
-        "goal": "Be fluent in Spanish",
-        "user_id": 4,
+        "name": "Be fluent in Spanish",
+        "user_id": 2,
         "complete": false
     },
     {
-        "goal": "Take a Sisters Trip to Europe",
-         "user_id": 5,
+        "name": "Take a Sisters Trip to Europe",
+         "user_id": 1,
          "complete": true
     },
     {
-        "goal": "Open a Food Truck",
-        "user_id": 6,
+        "name": "Open a Food Truck",
+        "user_id": 2,
         "complete": false
     }
   ]
