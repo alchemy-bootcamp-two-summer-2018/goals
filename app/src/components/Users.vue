@@ -38,4 +38,13 @@ export default {
 section {
   padding-bottom: 100px;
 }
+
+ul {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-gap: 5px;
+  margin: 20px;
+}
+
+
 </style>

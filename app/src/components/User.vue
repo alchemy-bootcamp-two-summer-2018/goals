@@ -2,8 +2,9 @@
   <li>
     <div class="title">
       <h3>User: {{user.email}}</h3>
-      <div v-for="(goal, i) in user.goals" :key="goal.description">
-      <p> GOAL #{{i+1}}: {{goal.description}}</p>
+      <div class="user-goals" v-for="(goal, i) in user.goals" :key="goal.description">
+        <p class="col-1">#{{i+1}}:</p>
+        <p class="col-2">{{goal.description}}</p>
       </div>
     </div>
   </li>
@@ -18,38 +19,29 @@ export default {
 </script>
 
 <style scoped>
+
+
 body {
   font-family: 'Open Sans';
 }
 li {
   list-style: none;
+  border: 1px solid var(--darkbacon);
 }
 h3 {
-  color: red;
+  color: var(--darkbacon);
 }
-/*
-h3{
-  font-family:'Playfair Display';
-  font-size:25px;
-  letter-spacing: 1px;
-  color:white;
-  margin-bottom:0;
-  text-transform: none;
+
+.user-goals {
+  display: grid;
+  grid-template-columns: 0.1fr 1fr;
 }
-p {
-  margin-top: 15px;
-  font-size: 10px;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  text-align: center !important;
+.col-1 {
+  justify-self: end;
 }
-.title-bg {
-  background: black;
-  color:white;
-  position: absolute;     
-  text-align: center;  
-  padding: 0px 20px 10px 20px;  
-  bottom: 0px; 
-  width: 100%;
-} */
+.col-2 {
+  justify-self: start;
+}
+
 </style>
+
