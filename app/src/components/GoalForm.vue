@@ -69,14 +69,6 @@ export default {
 
 <style>
 
-:root {
-  /* COLORS */
-  --lightbacon: #f7e1d4;
-  --white: #ffffff;
-  --black: black;
-  --darkbacon: #fea793;
-}
-
 textarea {
   background: var(--lightbacon);
   border-radius: 15px 15px;

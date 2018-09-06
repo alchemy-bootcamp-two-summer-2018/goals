@@ -15,3 +15,11 @@ body {
 body, html, .app {
   min-height: 100%;
 }
+
+:root {
+  /* COLORS */
+  --lightbacon: #f7e1d4;
+  --white: #ffffff;
+  --black: black;
+  --darkbacon: #fea793;
+}

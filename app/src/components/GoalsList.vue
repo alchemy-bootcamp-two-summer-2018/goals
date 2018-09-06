@@ -28,15 +28,6 @@ export default {
 
 <style scoped>
 
-:root {
-  /* COLORS */
-  --lightbacon: #fff8ed;
-  --white: #ffffff;
-  --black: black;
-  --darkbacon: #fea793;
-}
-
-
 html {
   box-sizing: border-box;
 }

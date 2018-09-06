@@ -7,13 +7,6 @@
 </template>
 
 <style scoped>
-:root {
-  /* COLORS */
-  --lightbacon: #e9cfa5;
-  --white: #ffffff;
-  --black: black;
-  --darkbacon: #fea793;
-}
 
 .nav-link {
   height: 25px;
