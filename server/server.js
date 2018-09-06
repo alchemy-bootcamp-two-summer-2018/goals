@@ -137,9 +137,10 @@ app.put('/api/goals/me', (req, res, next) => {
     RETURNING *;
   `,
   [body.name, body.completed, body.id, req.userId]  
-  ).then(result => {
-    res.send(result.rows[0]);
-  })
+  ).then(console.log('put route pinged'))
+    .then(result => {
+      res.send(result.rows[0]);
+    })
     .catch(next);
 });
 

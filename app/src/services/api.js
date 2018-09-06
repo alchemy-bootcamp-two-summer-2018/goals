@@ -25,7 +25,7 @@ export function getGoals() {
 }
 
 export function addGoal(goal) {
-  return fetch(GOALS_URL, {
+  return fetch(`${GOALS_URL}/me`, {
     method: 'POST',
     headers: getHeaders(),
     body: JSON.stringify(goal)
