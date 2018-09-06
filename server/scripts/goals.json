@@ -1,0 +1,4 @@
+[
+    { "name": "Do the laundry", "userId": 1, "completed": "false" },
+    { "name": "Walk the dog", "userId": 2, "completed": "true" }
+]
