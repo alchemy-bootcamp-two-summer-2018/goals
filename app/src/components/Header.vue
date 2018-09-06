@@ -14,7 +14,7 @@
     </nav>
     
     <div class="user-controls">
-      <p class="current-user nav" v-if="user">User: {{ user.email }}</p>
+      <p class="current-user" v-if="user">User: {{ user.email }}</p>
       <RouterLink class="nav" v-if="!user" to="/auth">Sign In</RouterLink>
       <a class="nav" v-if="user" href="/" @click.prevent="onSignOut">Sign Out</a>
     </div>
@@ -47,7 +47,7 @@ export default {
 .current-user {
   font-weight: bolder;
   display: inline-block;
-  width: 140px;
+  min-width: 140px;
   font-size: 22px;
   padding: 5px;
   margin: 10px;
