@@ -1,21 +1,34 @@
 <template>
   <div>
+    
     <ul v-if="goals">
-      <li v-for="goal in goals"
-        :key="goal.id">
-        {{ goal.name }}
-        <button @click="handleComplete">Complete</button>
-      </li>
+      <div v-for="(goal, i) in goals" :key="goal.id">
+        <li>
+          {{ goal.name }}
+
+          <button v-if="goal.completed" @click="markAsCompleted(i)">Mark as Incomplete</button>
+          <button v-else @click="markAsCompleted(i)">Mark as Complete</button>
+    
+        </li>
+      </div>
     </ul>
     <AddGoals :on-add="handleAdd"/>
     <GoalComplete :goals="goals"/>
+    <UserCount :goals="goals"/>
   </div>
 </template>
 
 <script>
 import AddGoals from './AddGoals.vue';
 import GoalComplete from './GoalComplete.vue';
-import { addGoal, getGoals }from '../services/api';
+import { addGoal, getGoals, updateGoal }from '../services/api';
+import UserCount from './UserCount.vue';
+
+const initGoalComplete = () => {
+  return {
+    completed: false
+  }
+}
 export default {
   props: {
 
@@ -23,6 +36,9 @@ export default {
   data() {
     return {
       goals: null,
+      // goal: initGoals()
+      goal: initGoalComplete()
+      // this.goal ? Object.assign({}, this.goal) : initGoalComplete()
     }
   },
   created() {
@@ -36,19 +52,21 @@ export default {
   },
   components: {
     AddGoals,
-    GoalComplete
+    GoalComplete,
+    UserCount
   },
   methods: {
     handleAdd(goal) {
-      console.log(goal.completed)
       return addGoal(goal)
         .then(saved => {
           this.goals.push(saved);
         })
     },
-    handleComplete() {
-
+    markAsCompleted(index) {
+      this.goals[index].completed = !this.goals[index].completed
+      updateGoal(this.goals[index])
     }
+   
   }
 
 }

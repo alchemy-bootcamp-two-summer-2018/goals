@@ -108,7 +108,6 @@ app.use((req, res, next) => {
 
 app.post('/api/goals', (req, res, next) => {
   const body = req.body;
-  console.log(body)
   if(body.name === 'error') return next('bad name');
   client.query(`
     INSERT INTO goals (user_id, name, completed)
@@ -122,7 +121,18 @@ app.post('/api/goals', (req, res, next) => {
     .catch(next);
 });
 
-
+app.put('/api/goals', (req, res, next) => {
+  const body = req.body;
+  if(body.name === 'error') return next('bad name')
+  client.query(`
+    UPDATE goals
+      completed = $1
+    WHERE id = $2
+    RETURNING *;
+  `,
+  [body.completed, body.id]
+  )
+})
 // app.get('/api/goals', (req, res, next) => {
 //   const goalPromise = client.query(`
 //     SELECT name
@@ -147,9 +157,10 @@ app.post('/api/goals', (req, res, next) => {
 
 app.get('/api/goals', (req, res, next) => {
   client.query(`
-    SELECT name, completed
+    SELECT id, name, completed
     FROM goals
     WHERE user_id = $1;
+    ORDER BY id,
   `,
   [req.userId])
     .then(result => {

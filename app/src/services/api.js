@@ -31,6 +31,15 @@ export function getGoals() {
     headers: getHeaders()
   })
     .then(responseHandler);
+} 
+
+export function updateGoal(goal) {
+  return fetch(GOALS_URL, {
+    method: 'PUT',
+    headers: getHeaders(),
+    body: JSON.stringify(goal)
+  })
+    .then(responseHandler);
 }
 
 export function signUp(credentials) {

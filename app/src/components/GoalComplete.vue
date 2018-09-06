@@ -5,16 +5,21 @@
       <ul>
         <li v-for="goal in goals"
             :key="goal.id"
-            >
+            v-if="goal.completed">
             {{ goal.name }}
+            
         </li>
       </ul>
     </div>
 
     <div id="incomplete">
       <h2>To Do</h2>
-      <ul>
-        <li>Goal 2</li>
+      <ul >
+        <li v-for="goal in goals"
+          :key="goal.id"
+          v-if="!goal.completed">
+          {{ goal.name }}
+        </li>
       </ul>
     </div>
   </div>
@@ -25,6 +30,8 @@
 export default {
   props: {
     goals: Array
+  },
+  method: {
   }
 
 }

@@ -27,6 +27,7 @@ export default {
   },
   created() {
     this.user = checkForToken();
+    // this.goal = getGoals();
   },
   methods: {
     handleUser(user) {
