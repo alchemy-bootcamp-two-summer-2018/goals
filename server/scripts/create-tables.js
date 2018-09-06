@@ -15,10 +15,10 @@ client.query(`
         completed BOOLEAN
     );
 `)
-    .then(
-        () => console.log('Booya! Create tables complete'),
-        err => console.log(err)
-    )
-    .then(() => {
-        client.end();
-    })
+  .then(
+    () => console.log('Booya! Create tables complete'),
+    err => console.log(err)
+  )
+  .then(() => {
+    client.end();
+  });

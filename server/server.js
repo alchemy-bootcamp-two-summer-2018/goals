@@ -5,7 +5,7 @@ const express = require('express');
 const app = express();
 
 // superagent client AJAX library for calling 3rd party APIs
-const request = require('superagent');
+// const request = require('superagent');
 
 // middleware (cors and read json body)
 const cors = require('cors');
@@ -27,7 +27,7 @@ app.post('/api/auth/signup', (req, res) => {
   
   if(!email || !password) {
     res.status(400).send({
-    error: 'email and password are required'
+      error: 'email and password are required'
     });
     return;
   }
@@ -39,31 +39,31 @@ app.post('/api/auth/signup', (req, res) => {
   `,
   [email])
     .then(results => {
-    if(results.rows[0].count > 0) {
-      res.status(400).send({ error: 'email already in use' });
-      return;
-    }
+      if(results.rows[0].count > 0) {
+        res.status(400).send({ error: 'email already in use' });
+        return;
+      }
 
-    client.query(`
-      insert into users (email, password)
-      values ($1, $2)
-      returning id, email
-    `,
-    [email, password])
-      .then(results => {
-      res.send(results.rows[0]);
-      });
+      client.query(`
+        insert into users (email, password)
+        values ($1, $2)
+        returning id, email
+      `,
+      [email, password])
+        .then(results => {
+          res.send(results.rows[0]);
+        });
     });
 });
     
 app.post('/api/auth/signin', (req, res) => {
-const body = req.body;
-const email = body.email;
-const password = body.password;
+  const body = req.body;
+  const email = body.email;
+  const password = body.password;
     
   if(!email || !password) {
     res.status(400).send({
-    error: 'email and password are required'
+      error: 'email and password are required'
     });
     return;
   }
@@ -76,16 +76,16 @@ const password = body.password;
   [email]
   )
     .then(results => {
-    const row = results.rows[0];
-    if(!row || row.password !== password) {
-      res.status(401).send({ error: 'invalid email or password' });
-      return;
-    }
-    res.send({ 
-      id: row.id,
-      email: row.email
+      const row = results.rows[0];
+      if(!row || row.password !== password) {
+        res.status(401).send({ error: 'invalid email or password' });
+        return;
+      }
+      res.send({ 
+        id: row.id,
+        email: row.email
+      });
     });
-  });
 });
 
 app.use((req, res, next) => {
@@ -119,18 +119,18 @@ app.post('/api/goals', (req, res, next) => {
 
 app.put('/api/goals', (req, res, next) => {
   const body = req.body;
-  if(body.name === 'error') return next('bad name')
+  if(body.name === 'error') return next('bad name');
   client.query(`
     UPDATE goals
     SET
       completed = $1
-    WHERE id = $2,
+    WHERE id = $2
     AND user_id = $3
     RETURNING *;
   `,
   [body.completed, body.id, req.userId]
   ).then(result => {
-    res.send(result.rows[0])
+    res.send(result.rows[0]);
   })
     .catch(next);
 });
@@ -148,7 +148,7 @@ app.get('/api/goals', (req, res, next) => {
       res.send(result.rows);
     })
     .catch(next);
-})
+});
 
 app.get('/api/users', (req, res) => { 
   client.query(`
@@ -170,8 +170,8 @@ app.get('/api/users', (req, res) => {
         return goal.userId === user.id; 
       }); 
     }); res.send(users);
-    }) 
-      .catch(err => console.log(err)); });
+  }) 
+    .catch(err => console.log(err)); });
 
 // app.get('/api/users', (req, res, next) => {
 //   client.query(`
