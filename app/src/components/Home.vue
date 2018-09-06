@@ -19,10 +19,15 @@ main {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: top;
-  padding: 300px;
+  /* padding: 300px; */
+  padding-top: 1px;
+  min-height: 500px;
+  height: 70vh;
  
 }
 .welcome{
+  margin-top: 5%;
+  margin-left: 10%;
   text-align:left;
   font-size: 30px;
 }
