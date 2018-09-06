@@ -1,0 +1,25 @@
+
+
+* {
+  font-family: Lato, Helvetica, Corbel, sans-serif;
+}
+
+body {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  margin: 0;
+}
+
+body, html, .app {
+  min-height: 100%;
+}
+
+:root {
+  /* COLORS */
+  --lightbacon: #f7e1d4;
+  --white: #ffffff;
+  --black: black;
+  --darkbacon: #fea793;
+}
