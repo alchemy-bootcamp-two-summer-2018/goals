@@ -16,8 +16,13 @@
       </nav>
       <span v-if="user">user: {{ user.email }}</span>
     </header>
+    <main>
+      <router-view class="content" :onUser="handleUser"></router-view>
 
-    <router-view :onUser="handleUser"></router-view>
+      <footer class="footer">
+        <p>&copy;MackBG | 2018</p>
+      </footer>
+    </main>
   </div>
 </template>
 
@@ -49,16 +54,10 @@ export default {
 </script>
 
 <style>
-/* #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
-} */
 
 .nav {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   flex-wrap: wrap;
   margin-left: 5px;
   margin-right: 5px;
@@ -87,11 +86,28 @@ header {
     text-align: center;
 }
 
+main {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.content {
+  flex: 1 0 auto;
+}
+
+.footer {
+  flex-shrink: 0;
+  background-color: black;
+  color: white;
+}
+
 a {
   background-color:#E6FDFF;
   color: black;
   padding: 3px;
   text-decoration: none;
+  margin: 5px;
 }
 @-webkit-keyframes swing
 {
