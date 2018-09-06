@@ -9,10 +9,9 @@ CREATE TABLE IF NOT EXISTS users (
   );
   CREATE TABLE IF NOT EXISTS goals (
     id SERIAL PRIMARY KEY,
-    name VARCHAR(256),
+    goal VARCHAR(1000),
+    complete BOOLEAN DEFAULT false,
     user_id INTEGER NOT NULL REFERENCES users(id),
-    founded INTEGER,
-    description VARCHAR(1024)
   );
 `)
   .then(

@@ -106,16 +106,14 @@ app.post('/api/auth/signIn', (req, res) => {
 // });
 
 // api data routes
-// app.get('/api/dogs', (req, res, next) => {
+// app.get('/api/goals', (req, res, next) => {
 
 //   client.query(`
 //     select id, 
-//       name, 
-//       personality_id as "personalityId", 
-//       type, 
-//       weight, 
-//       age
-//     from dogs
+//       goal, 
+//       complete,
+//       user_id as "userId", 
+//     FROM goals
 //     order by name;
 //   `).then(result => {
 //     res.send(result.rows);
@@ -124,8 +122,18 @@ app.post('/api/auth/signIn', (req, res) => {
 
 // });
 
-// app.post('/api/dogs', (req, res, next) => {
-//   const body = req.body;
+app.post('/api/auth/signin', (req, res) => {
+   const body = req.body;
+   const email = body.email;
+   const password = body.password;
+
+   if(!email || !password) {
+    res.status(400).send({
+      error: 'email and password required'
+    });
+    return;
+  }
+
 //   if(body.name === 'error') return next('bad name');
   
 //   client.query(`

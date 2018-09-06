@@ -1,16 +1,32 @@
 [
     {
-      "name": "Travel",
-      "goal_id": 1,
-      "population": 1337,
-      "founded": "2017",
-      "description": "Sovereign neighborhood in the heart of Portland"
+      "goal": "Visit friend in Egypt",
+      "user_id": 1,
+      "complete": false
     },
     {
-      "name": "Eats",
-      "goal_id": 2,
-      "population": 232,
-      "founded": "232",
-      "description": "Look to the clouds"
+        "goal": "Graduate from college",
+        "user_id": 2,
+        "complete": true
+    },
+    {
+        "goal": "Swim with Manta Rays",
+        "user_id": 3,
+        "complete": true
+    },
+    {
+        "goal": "Be fluent in Spanish",
+        "user_id": 4,
+        "complete": false
+    },
+    {
+        "goal": "Take a Sisters Trip to Europe",
+         "user_id": 5,
+         "complete": true
+    },
+    {
+        "goal": "Open a Food Truck",
+        "user_id": 6,
+        "complete": false
     }
   ]
