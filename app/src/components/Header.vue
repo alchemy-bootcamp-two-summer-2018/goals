@@ -1,22 +1,22 @@
 <template>
   <header>
-    
-    <div class="branding">
+  
+    <RouterLink to="/" class="branding">
       <img class="logo" alt="Bacon" src="../assets/logo.png">
       <h1>Bacon</h1>
-    </div>
-    
+    </RouterLink>
+
     <nav>
-      <RouterLink to="/">Home</RouterLink>
-      <RouterLink to="/about">About</RouterLink>
-      <RouterLink v-if="user" to="/goals">Goals</RouterLink>
-      <RouterLink v-if="user" to="/users">Users</RouterLink>
+      <RouterLink class="nav" to="/">Home</RouterLink>
+      <RouterLink class="nav" to="/about">About</RouterLink>
+      <RouterLink class="nav" v-if="user" to="/goals">Goals</RouterLink>
+      <RouterLink class="nav" v-if="user" to="/users">Users</RouterLink>
     </nav>
     
     <div class="user-controls">
-      <p class="current-user" v-if="user">User: {{ user.email }}</p>
-      <RouterLink v-if="!user" to="/auth">Sign In</RouterLink>
-      <a v-if="user" href="/" @click.prevent="onSignOut">Sign Out</a>
+      <p class="current-user nav" v-if="user">User: {{ user.email }}</p>
+      <RouterLink class="nav" v-if="!user" to="/auth">Sign In</RouterLink>
+      <a class="nav" v-if="user" href="/" @click.prevent="onSignOut">Sign Out</a>
     </div>
 
   </header>
@@ -33,6 +33,16 @@ export default {
 </script>
 
 <style scoped>
+
+.branding {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.branding a{
+  text-decoration: none;
+}
 
 .current-user {
   font-weight: bolder;
@@ -54,9 +64,10 @@ export default {
 img.logo {
   width: 50px;
   height: 50px;
+  
 }
 
-a {
+.nav {
   display: inline-block;
   width: 140px;
   font-size: 22px;
@@ -72,7 +83,7 @@ a {
   border: 4px solid #ffd90000;
 }
 
-a:hover {
+.nav:hover {
   background-color: #fea793;
   box-shadow: 0.9px 0.9px 0.9px black;
   border: 4px solid rgba(243, 221, 97, 0.582);
