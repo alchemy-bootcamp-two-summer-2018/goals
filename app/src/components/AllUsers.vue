@@ -1,16 +1,10 @@
 <template>
   <section>
-    <h1>How you stack up to other users!</h1>
-
-    <div v-fo="use=user"
-      :key="use.email">
-      {{ use.email }}
-    </div>
-
-    <!-- <div v-for="user in users"
-      :key="user.id">
-      {{user.name}} 
-    </div> -->
+    <h2>{{ user.email }} has the following goals:</h2>
+    <li v-for="goal in user.goals" :key="goal.id">
+      {{goal.name}}
+    </li>
+    
 
   </section>
 </template>
@@ -19,8 +13,7 @@
 
 export default {
   props: {
-    users: Array,
-    user: Array
+    user: Object,
   },
 };
 </script>

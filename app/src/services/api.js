@@ -2,7 +2,6 @@ const URL = '/api';
 const GOALS_URL = `${URL}/goals`;
 const AUTH_URL = `${URL}/auth`;
 const USERS_URL = `${URL}/users`;
-const USER_URL = `${URL}/user`;
 
 function responseHandler(response) {
   if(response.ok) return response.json();
@@ -35,15 +34,8 @@ export function getGoals() {
     .then(responseHandler);
 } 
 
-export function getUsers() {
+export function getUserInfo() {
   return fetch(USERS_URL, {
-    headers: getHeaders()
-  })
-    .then(responseHandler);
-}
-
-export function getDistinctUsers() {
-  return fetch(USER_URL, {
     headers: getHeaders()
   })
     .then(responseHandler);

@@ -13,7 +13,8 @@
     </ul>
     <AddGoals :on-add="handleAdd"/>
     <GoalComplete :goals="goals"/>
-    <AllUsers :users="users"
+    <AllUsers v-for="user in users" 
+      :key="user.id"
       :user="user"/>
   </div>
 </template>
@@ -21,7 +22,7 @@
 <script>
 import AddGoals from './AddGoals.vue';
 import GoalComplete from './GoalComplete.vue';
-import { addGoal, getGoals, updateGoal, getUsers, getDistinctUsers } from '../services/api';
+import { addGoal, getGoals, updateGoal, getUserInfo } from '../services/api';
 import AllUsers from './AllUsers.vue';
 
 const initGoalComplete = () => {
@@ -38,8 +39,7 @@ export default {
     return {
       goals: null,
       goal: initGoalComplete(),
-      users: null,
-      user: null
+      users: null
     };
   },
   created() {
@@ -51,17 +51,9 @@ export default {
         this.error = err;
       });
    
-    getUsers()
+    getUserInfo()
       .then(users => {
         this.users = users;
-      })
-      .catch(err => {
-        this.error = err;
-      });
-
-    getDistinctUsers()
-      .then(user => {
-        this.user = user;
       })
       .catch(err => {
         this.error = err;

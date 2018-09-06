@@ -31,10 +31,7 @@
 export default {
   props: {
     goals: Array
-  },
-  method: {
   }
-
 };
 </script>
 

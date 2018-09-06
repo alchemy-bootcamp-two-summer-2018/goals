@@ -122,13 +122,18 @@ app.put('/api/goals', (req, res, next) => {
   if(body.name === 'error') return next('bad name')
   client.query(`
     UPDATE goals
+    SET
       completed = $1
-    WHERE id = $2
+    WHERE id = $2,
+    AND user_id = $3
     RETURNING *;
   `,
-  [body.completed, body.id]
-  )
-})
+  [body.completed, body.id, req.userId]
+  ).then(result => {
+    res.send(result.rows[0])
+  })
+    .catch(next);
+});
 
 
 app.get('/api/goals', (req, res, next) => {
@@ -145,34 +150,43 @@ app.get('/api/goals', (req, res, next) => {
     .catch(next);
 })
 
-
-
-app.get('/api/user', (req,res,next) => {
+app.get('/api/users', (req, res) => { 
   client.query(`
-  SELECT DISTINCT
-    email
-  FROM users;
-  `)
-  .then(result => {
-    res.send(result.rows)
-  })
-  .catch(next)
-})
+    SELECT 
+      g.id, 
+      g.user_id as "userId", 
+      g.name,
+      g.completed 
+    FROM goals g; 
+    SELECT 
+      u.id, 
+      u.email 
+    FROM users u;`
+  ) .then(result => { 
+    const goals = result[0].rows; 
+    const users = result[1].rows; 
+    users.forEach(user => { 
+      user.goals = goals.filter(goal => { 
+        return goal.userId === user.id; 
+      }); 
+    }); res.send(users);
+    }) 
+      .catch(err => console.log(err)); });
 
-app.get('/api/users', (req, res, next) => {
-  client.query(`
-  SELECT 
-    u.email,
-    g.name
-  FROM users as u
-  LEFT JOIN goals as g
-  ON g.user_id = u.id;
-  `)
-    .then(result => {
-      res.send(result.rows)
-    })
-    .catch(next)
-})
+// app.get('/api/users', (req, res, next) => {
+//   client.query(`
+//   SELECT 
+//     u.email,
+//     g.name
+//   FROM users as u
+//   LEFT JOIN goals as g
+//   ON g.user_id = u.id;
+//   `)
+//     .then(result => {
+//       res.send(result.rows)
+//     })
+//     .catch(next)
+// })
 
 
 const PORT = process.env.PORT;
