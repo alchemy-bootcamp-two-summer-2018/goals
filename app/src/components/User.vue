@@ -32,6 +32,10 @@ h3 {
   color: var(--darkbacon);
 }
 
+p {
+  padding: 0px 5px;
+}
+
 .user-goals {
   display: grid;
   grid-template-columns: 0.1fr 1fr;
