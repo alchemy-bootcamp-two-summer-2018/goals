@@ -9,7 +9,8 @@ client.query(`
     );
     CREATE TABLE IF NOT EXISTS goals (
       id SERIAL PRIMARY KEY,
-      description VARCHAR(1024)
+      description VARCHAR(1024),
+      completed BOOLEAN
     )
 `)
   .then(

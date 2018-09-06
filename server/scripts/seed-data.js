@@ -1,17 +1,33 @@
 require('dotenv').config();
 const client = require('../db-client');
+const users = require('../users.json');
+const goals = require('../goals.json');
 
 Promise.all(
-  user.filter(password => {
+  users.map(user => {
     return client.query(`
-        INSERT INTO users (id, password)
+        INSERT INTO users (email, password)
         VALUES ($1, $2);
     `,
-    [user.name, user.password]
-    ).then(result => result.users);
+    [user.email, user.password]
+    ).then(result => result.rows[0]);
   })
 )
   .then(() => {
+    return Promise.all(
+      goals.map(goal => {
+        return client.query(`
+          INSERT INTO goals (
+            id,
+            description,
+            completed
+          )
+          VALUES ($1, $2, $3);
+      `,
+        [goal.userId, goal.description, goal.completed]
+        ).then(result => result.rows[0]);
+      })
+    );
    
   })
   .then(
@@ -19,3 +35,4 @@ Promise.all(
     err => console.error(err)
   )
   .then(() => client.end());
+
