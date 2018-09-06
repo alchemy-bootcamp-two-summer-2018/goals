@@ -5,7 +5,7 @@ require('dotenv').config();
 const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
-const request = require('superagent');
+// const request = require('superagent');
 
 // initialize all three, plus express.json for reading json body
 const app = express();
