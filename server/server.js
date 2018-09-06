@@ -69,9 +69,9 @@ const password = body.password;
   }
   
   client.query(`
-    select id, email, password
-    from users
-    where email = $1
+    SELECT id, email, password
+    FROM users
+    WHERE email = $1
   `,
   [email]
   )
@@ -89,19 +89,15 @@ const password = body.password;
 });
 
 app.use((req, res, next) => {
-  // is there a Authorization header?
   const id = req.get('Authorization');
   if(!id) {
-    // no - send an error
     res.status(403).send({
       error: 'No token found'
     });
     return;
   }
-
-  // 1. set req.userId to the header
   req.userId = id;
-  // 2. call next()
+
   next();
 });
 
@@ -133,34 +129,14 @@ app.put('/api/goals', (req, res, next) => {
   [body.completed, body.id]
   )
 })
-// app.get('/api/goals', (req, res, next) => {
-//   const goalPromise = client.query(`
-//     SELECT name
-//     FROM goals
-//     WHERE user_id = $1;
-//   `,
-//   [req.userId]);
 
-//   Promise.all(goalPromise)
-//     .then(promiseValues => {
-//       const goalResult = proviseValues[0];
-//       if(goalResult.rows.length ===0) {
-//         res.sendStatus(404);
-//         return;
-//       }
-
-//       const goal = goalResult.rows[0];
-//       res.send(goal);
-//     })
-//     .catch(next);
-// })
 
 app.get('/api/goals', (req, res, next) => {
   client.query(`
     SELECT id, name, completed
     FROM goals
-    WHERE user_id = $1;
-    ORDER BY id,
+    WHERE user_id = $1
+    ORDER BY id;
   `,
   [req.userId])
     .then(result => {
@@ -171,18 +147,34 @@ app.get('/api/goals', (req, res, next) => {
 
 
 
+app.get('/api/user', (req,res,next) => {
+  client.query(`
+  SELECT DISTINCT
+    email
+  FROM users;
+  `)
+  .then(result => {
+    res.send(result.rows)
+  })
+  .catch(next)
+})
+
+app.get('/api/users', (req, res, next) => {
+  client.query(`
+  SELECT 
+    u.email,
+    g.name
+  FROM users as u
+  LEFT JOIN goals as g
+  ON g.user_id = u.id;
+  `)
+    .then(result => {
+      res.send(result.rows)
+    })
+    .catch(next)
+})
 
 
 const PORT = process.env.PORT;
 app.listen(PORT, () => console.log('server humming along on port', PORT));
 
-
-// May need left or right join to show all of the users and their goals including those who have no goals.
-
-//can do two select statements at once.
-
-//SELECT xyz
-//FROM abc;
-
-//SELECT efg
-//FROM hij;

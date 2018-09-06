@@ -68,7 +68,7 @@ export default {
     }
   },
   components: {
-      FormControl
+    FormControl
   },
   methods: {
     handleSubmit() {
@@ -85,7 +85,7 @@ export default {
     }
   }
 
-}
+};
 </script>
 
 <style>

@@ -2,6 +2,7 @@
   <div >
     <div id="completed">
       <h2>Completed Goals</h2>
+      
       <ul>
         <li v-for="goal in goals"
             :key="goal.id"
@@ -34,7 +35,7 @@ export default {
   method: {
   }
 
-}
+};
 </script>
 
 <style>
