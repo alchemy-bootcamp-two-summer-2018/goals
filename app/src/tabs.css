@@ -70,6 +70,7 @@
 
 .tabs-component-panels {
   padding: 4em 0;
+  min-height: 25vh;
 }
 
 @media (min-width: 700px) {

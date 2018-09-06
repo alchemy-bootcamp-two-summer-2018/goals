@@ -1,36 +1,42 @@
 <template>
   <div>
-    <h2>I am the About component</h2>
-    <h3>I have cool tabs</h3>
-    <Tabs>
-      <Tab name="Tab 1">
-        <h4>Header for a tab</h4>
-        <p>some content on this tab</p>
-      </Tab>
-      <Tab name="Tab 2">
-        <h4>Header for second tab</h4>
-        <p>some content on this tab</p>
-      </Tab>
-      <Tab name="Tab 3">
-        <h4>Header for third tab</h4>
-        <p>some content on this tab</p>
-      </Tab>
-    </Tabs>
+    <h2>At Bacon, We Care About Our Users</h2>
+    <p>
+      Have you ever been lost? So far out at sea that you can't find dry land?
+    </p>
+    <p>
+      Now you're found. One small step at a time, we'll help you back onto land and into the light.
+    </p>
+    <p>
+      Go far, my son.
+    </p>
   </div>
 </template>
 
 <script>
-import { Tabs, Tab } from 'vue-tabs-component';
 
 export default {
-  components: {
-    Tabs,
-    Tab
-  }
+
 };
 
 </script>
 
 <style scoped>
+
+h2 {
+  font-size: 36px;
+}
+
+p.center {
+  text-align: center;
+}
+
+p {
+  font-size: 18px;
+  text-align: left;
+  width: 30%;
+  padding: 10px;
+  margin: 10px auto;
+}
 
 </style>

@@ -1,67 +1,66 @@
 <template>
-    <header>
-    <img class="logo" alt="Bacon" src="../assets/logo.png">
+  <header>
     
-    <div>
+    <div class="branding">
+      <img class="logo" alt="Bacon" src="../assets/logo.png">
       <h1>Bacon</h1>
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-        <RouterLink v-if="user" to="/goals">Goals</RouterLink>
-        <RouterLink v-if="user" to="/users">Users</RouterLink>
-        <RouterLink v-if="!user" to="/auth">Sign In</RouterLink>
-        <a v-if="user" href="/" @click.prevent="handleSignOut">Sign Out</a>
-      </nav>
-      <span v-if="user">user: {{ user.email }}</span>
     </div>
-
-    <img class="flag" alt="Murica" src="../assets/flag.png">
+    
+    <nav>
+      <RouterLink to="/">Home</RouterLink>
+      <RouterLink to="/about">About</RouterLink>
+      <RouterLink v-if="user" to="/goals">Goals</RouterLink>
+      <RouterLink v-if="user" to="/users">Users</RouterLink>
+    </nav>
+    
+    <div class="user-controls">
+      <p class="current-user" v-if="user">User: {{ user.email }}</p>
+      <RouterLink v-if="!user" to="/auth">Sign In</RouterLink>
+      <a v-if="user" href="/" @click.prevent="onSignOut">Sign Out</a>
+    </div>
 
   </header>
 </template>
 
 <script>
-import { checkForToken, signOut } from '../services/api';
 
 export default {
-  data() {
-    return {
-      user: null
-    };
-  },
-  created() {
-    this.user = checkForToken();
-  },
-  methods: {
-    handleUser(user) {
-      this.user = user;
-    },
-    handleSignOut() {
-      signOut();
-      this.user = null;
-      this.$router.push('/');
-    }
+  props: {
+    user: Object,
+    onSignOut: Function
   }
 };
 </script>
 
 <style scoped>
 
-img.logo {
-  width: 200px;
-  height: 200px;
+.current-user {
+  font-weight: bolder;
+  display: inline-block;
+  font-size: 22px;
+  padding: 5px;
+  margin: 10px;
+  border: 1px solid black;
+  text-decoration: none;
+  color: black;
+  text-shadow: 1px 1px white;
+  border-radius: 5px;
+  box-shadow: 0.5px 0.5px 0.5px black;
+  background-color: rgba(65,214,195,0);
+  border: 4px solid #ffd90000;
 }
 
-img.flag {
-  max-height: 200px;
+img.logo {
+  width: 50px;
+  height: 50px;
 }
 
 a {
   display: inline-block;
   width: 140px;
-  font-size: 24px;
-  padding: 10px;
-  margin: 15px;
+  font-size: 22px;
+  padding: 5px;
+  margin: 10px;
   border: 1px solid black;
   text-decoration: none;
   color: black;
@@ -79,27 +78,23 @@ a:hover {
 }
 
 h1 {
-  font-family: 'Baloo Tammudu', cursive;
-  font-size: 74px;
+  font-size: 48px;
   font-weight: normal;
   display: inline-block;
-  height: 100px;
-  margin: 5px 0px 0px 0px;
+  margin: auto;
   text-transform: uppercase;
   color: black;
   text-shadow: 2px 2px white;
 }
 
-nav {
-  padding-bottom: 20px;
-}
+
 
 header {
-  display: grid;
-  grid-template-columns: 25% 50% 25%;
+  display: flex;
+  justify-content: space-between;
+  
   box-shadow: 3px 2px 2px black;
   background: #fea793;
-  justify-items: center;
 }
 
 header:hover {

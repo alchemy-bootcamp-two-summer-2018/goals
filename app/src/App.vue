@@ -1,6 +1,9 @@
 <template>
   <div id="app">
-    <Header/>
+    <Header 
+      :onSignOut="handleSignOut"
+      :user="user"
+    />
     <router-view :onUser="handleUser"></router-view>
     <Footer/>
   </div>
@@ -31,7 +34,7 @@ export default {
     handleSignOut() {
       signOut();
       this.user = null;
-      this.$router.push('/');
+      this.$router.push('/logout');
     }
   }
 

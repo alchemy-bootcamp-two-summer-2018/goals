@@ -19,12 +19,12 @@ Promise.all(
         return client.query(`
             INSERT INTO goals (
               user_id, 
-              is_completed,
+              completed,
               description
             )
             VALUES ($1, $2, $3);
         `,
-        [goal.user_id, goal.is_completed, goal.description]
+        [goal.user_id, goal.completed, goal.description]
         ).then(result => result.rows[0]);
       })
     );

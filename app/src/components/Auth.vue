@@ -8,28 +8,35 @@
           : "New? Click here to sign up"
       }}
     </button>
-    <pre>{{ error }}</pre>
-    <form @submit.prevent="handleSubmit">
-      <FormControl label="email">
-        <input v-model="credentials.email">
-      </FormControl>
-      <FormControl label="password">
-        <input 
-          :type="show ? 'text' : 'password'" 
-          v-model="credentials.password">
-        <button 
-          @click="show = !show"
-          type="button"
-        >
-          {{ show ? 'Hide' : 'Show' }}
-        </button>
-      </FormControl>
-      <FormControl>
-        <button type="submit">
-          {{ label }}
-        </button>
-      </FormControl>
-    </form>
+    
+    <div class="auth-form">
+      <pre>{{ error }}</pre>
+      <form @submit.prevent="handleSubmit">
+
+        <FormControl label="email">
+          <input class="email-input" v-model="credentials.email">
+        </FormControl>
+
+        <FormControl label="password">
+          <input 
+            :type="show ? 'text' : 'password'" 
+            v-model="credentials.password">
+          <button 
+            @click="show = !show"
+            type="button"
+          >
+            {{ show ? 'Hide' : 'Show' }}
+          </button>
+        </FormControl>
+
+        <FormControl>
+          <button type="submit">
+            {{ label }}
+          </button>
+        </FormControl>
+
+      </form>
+    </div>
   </div>
 </template>
 
@@ -89,5 +96,23 @@ export default {
 </script>
 
 <style scoped>
+
+.email-input {
+  width: 220px;
+}
+
+.auth-form {
+  width: 350px;
+  margin: 0 auto;
+}
+
+.form-control {
+  margin: 0 auto;
+}
+
+input {
+  margin: 0px auto;
+}
+
 
 </style>

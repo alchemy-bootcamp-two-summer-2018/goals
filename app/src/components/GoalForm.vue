@@ -26,8 +26,8 @@ import FormControl from './FormControl';
 const initGoal = () => {
   return {
     description: '',
-    isCompleted: '',
-    userId: ''
+    completed: false,
+    // userId: ''
   };
 };
 
@@ -69,7 +69,33 @@ export default {
 
 <style>
 
-.neighborhood-form {
+:root {
+  /* COLORS */
+  --lightbacon: #f7e1d4;
+  --white: #ffffff;
+  --black: black;
+  --darkbacon: #fea793;
+}
+
+textarea {
+  background: var(--lightbacon);
+  border-radius: 15px 15px;
+  padding: 15px;
+}
+
+button {
+  background: var(--lightbacon);
+  padding: 6px;
+  border-radius: 8px 8px;
+  font-size: 16px;
+}
+
+button:hover {
+  background: var(--darkbacon);
+  cursor: pointer;
+}
+
+.goal-form {
   width: 300px;
   text-align: left;
 }
@@ -77,4 +103,13 @@ export default {
 label {
   display: block;
 }
+
+.goal-form {
+  width:400px;
+  margin: 30px auto;
+}
+
+
+
+
 </style>

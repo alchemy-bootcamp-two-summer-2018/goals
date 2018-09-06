@@ -22,7 +22,7 @@ export default {
 <style scoped>
 
 .form-control {
-  width: 300px;
+  width:fit-content;
   text-align: left;
 }
 
@@ -31,5 +31,6 @@ label {
   font-weight: bolder;
   margin-top: 10px;
 }
+
 
 </style>

@@ -1,15 +1,12 @@
 <template>
   <main>
-    <h2>Can you bring home the bacon?</h2>
-    <p>
-      Here at bacon, we think goal setting matters. We want to help people achieve what they desire, which is bringing home the bacon.
-    </p>
+    <h2>You are now logged out!</h2>
+
     <p class="center">
-      <img src="../assets/bacon.gif" />
+      It was nice to see you! Don't forget about your goals!
     </p>
-    <p class="center">
-      Click <router-link to="/auth">here</router-link> to sign in!
-    </p>
+
+    <img src="../assets/bacon-heart.jpg">
   </main>
 </template>
 
