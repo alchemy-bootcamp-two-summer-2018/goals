@@ -2,21 +2,21 @@
   <div>
     <h3>Goals List</h3>
     <NewGoal :onAdd="handleAdd"/>
-    <div v-if="goals">
-      <p
-        v-for="goal in goals"
-        :key="goal.id"
-      >
+    <div 
+      v-if="goals" 
+      v-for="(goal, i) in goals"
+      :key="goal.id">
+      <p> 
+        <img class="check" @click="handleComplete(i)" v-if="goal.complete" src="https://dictionary.cambridge.org/images/thumb/check_noun_002_06440.jpg?version=4.0.43">
+        <img class="check" @click="handleComplete(i)" v-else src="https://cdn1.iconfinder.com/data/icons/toggle/512/checkbox-off-512.png">
         {{ goal.goal }}
-        {{ goal.status }}
-      <button @click="handleComplete" >Done</button>
       </p>
     </div>
   </div>
 </template>
 
 <script>
-import { addGoal, getGoals } from '../services/api';
+import { addGoal, getGoals, updateGoal } from '../services/api';
 import NewGoal from './NewGoal';
 
 export default {
@@ -39,8 +39,9 @@ export default {
           this.goals.push(saved);
         });
     },
-    handleComplete(goal) {
-      return 
+    handleComplete(index) {
+      this.goals[index].complete = !this.goals[index].complete;
+      updateGoal(this.goals[index]);
     }
   },
   components: {
@@ -50,6 +51,11 @@ export default {
 
 </script>
 
-<style>
+<style scoped>
+
+.check {
+  height: 30px;
+  width: 30px;
+}
 
 </style>

@@ -81,6 +81,15 @@ export function addGoal(goal) {
     .then(responseHandler);
 }
 
+export function updateGoal(goal) {
+  return fetch(`${GOALS_URL}`, {
+    method: 'PUT',
+    headers: getHeaders(),
+    body: JSON.stringify(goal)
+  })
+    .then(responseHandler);
+} 
+
 export function getUsers() {
   return fetch(`${USERS_URL}`, {
     headers: getHeaders()

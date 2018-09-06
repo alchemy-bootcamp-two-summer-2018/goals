@@ -3,8 +3,6 @@ require('dotenv').config();
 const express = require('express');
 const app = express();
 
-// const request = require('superagent');
-
 const cors = require('cors');
 const morgan = require('morgan');
 app.use(morgan('dev'));
@@ -131,51 +129,51 @@ app.post('/api/me/goals', (req, res, next) => {
     .catch(next);
 });
 
-// app.get('/api/users', (req, res) => {
-//   client.query(`
-//     SELECT
-//       g.id,
-//       g.goal,
-//       g.complete,
-//       u.id as "userID"
-//       FROM goals g
-//       RIGHT JOIN users u
-//       ON u.id = g.user_id
-//       ORDER BY g.goal;
-//   `)
-//     .then(result => {
-//       console.log(result);
-//       res.send(result.rows);
-//     })
-//     .catch(err => console.log(err));
-// });
+app.put('/api/me/goals', (req, res, next) => {
+  const body = req.body;
 
-// app.get('/api/users', (req, res) => {
-//   client.query(`
-//     SELECT
-//       g.id,
-//       g.goal,
-//       g.complete,
-//       g.user_id as "userId"
-//       FROM goals g;
+  client.query(`
+    UPDATE goals
+    SET
+      goal = $2,
+      complete = $3,
+      user_id = $4
+    WHERE id = $1
+    returning *, user_id as "userId";
+  `,
+  [body.id, body.goal, body.complete, req.userId]
+  ).then(result => {
+    res.send(result.rows[0]);
+  })
+    .catch(next);
+});
 
-//     SELECT
-//       u.id,
-//       u.email
-//       FROM users u;
-//   `)
-//     .then(result => {
-//       const goals = result[0];
-//       const users = result[1];
-//       users.forEach(user => {
-//         user.goals = goals.filter(goal => {
-//           return goal.userID === goal.id;
-//         });
-//       });
-//       res.send(users);
-//     })
-//     .catch(err => console.log(err));
-// });
+app.get('/api/users', (req, res) => {
+  client.query(`
+  SELECT
+    g.id,
+    g.goal,
+    g.complete,
+    g.user_id as "userId"
+    FROM goals g;
+
+    SELECT
+    u.id,
+    u.email
+    FROM users u;
+  `)
+    .then(result => {
+      const goals = result[0].rows;
+      const users = result[1].rows;
+      users.forEach(user => {
+        user.goals = goals.filter(goal => {
+          return goal.userId === user.id;
+        });
+      });
+      res.send(users);
+    })
+    .catch(err => console.log(err));
+});
 
 const PORT = process.env.PORT;
 app.listen(PORT, () => console.log('server running on port', PORT));
