@@ -3,15 +3,28 @@
     <!-- <Header/> -->
     <header>
       <h1>Goals Goals Goals!</h1>
-      <button class="header-button" @click="openMenu">Menu</button>
-      <div v-show="menuIsOpen">
-        <div class="mobile-nav">        
-          <RouterLink class="mobile-nav-el" to="/">HOME</RouterLink>
-          <RouterLink v-if="user" class="mobile-nav-el" to="/goals">GOALS</RouterLink>
-          <RouterLink v-if="!user" class="mobile-nav-el" to="/auth">SIGN IN</RouterLink>
-          <a class="mobile-nav-el" v-if="user" href="/" @click.prevent="handleSignOut">SIGN OUT</a>
-          <span id="welcome-user" v-if="user">User: {{ user.email }}</span>
-          <button class="header-button" @click="closeMenu">Close Menu</button>
+
+      <div class="desktop">
+          <span id="desktop-welcome-user" v-if="user"><i>User: {{ user.email }}</i></span>
+          <div class="desktop-nav">
+            <RouterLink class="desktop-nav-el" to="/">HOME</RouterLink>
+            <RouterLink class="desktop-nav-el" v-if="user" to="/goals">GOALS</RouterLink>
+            <RouterLink class="desktop-nav-el" v-if="!user" to="/auth">SIGN IN</RouterLink>
+            <a class="desktop-nav-el" v-if="user" href="/" @click.prevent="handleSignOut">SIGN OUT</a>
+          </div>
+      </div>
+
+      <div class="mobile">
+        <button class="header-button" @click="openMenu" v-show="!menuIsOpen">Menu</button>
+        <div v-show="menuIsOpen">
+          <div class="mobile-nav">        
+            <RouterLink class="mobile-nav-el" to="/">HOME</RouterLink>
+            <RouterLink v-if="user" class="mobile-nav-el" to="/goals">GOALS</RouterLink>
+            <RouterLink v-if="!user" class="mobile-nav-el" to="/auth">SIGN IN</RouterLink>
+            <a class="mobile-nav-el" v-if="user" href="/" @click.prevent="handleSignOut">SIGN OUT</a>
+            <span id="mobile-welcome-user" v-if="user">User: {{ user.email }}</span>
+            <button class="header-button" @click="closeMenu">Close Menu</button>
+          </div>
         </div>
       </div>
     </header>
@@ -59,11 +72,6 @@ export default {
 
 <style>
 
-.mobile-nav{
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
 
 h1 {
   text-align: center;
@@ -75,36 +83,74 @@ header {
   background-color: lightblue;
 }
 
-.mobile-nav-el:hover{
-  background-color: red;
+@media(max-width: 500px) {
+  .desktop {
+    display: none;
+  }
+
+  .mobile-nav{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .mobile-nav-el:hover{
+    background-color: red;
+  }
+
+  #mobile-welcome-user,
+  .mobile-nav-el{
+    text-align: center;
+    margin: 25px;
+    font-size: 35px;
+    text-decoration: none;
+    justify-content: center;
+  }
+
+  .mobile-nav-el{
+    border: 5px solid blue;
+    width: 90%;
+  }
+
+  .header-button {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    background-color: red;
+    font-size: 35px;
+    margin: 0px;
+  }
 }
 
-#welcome-user,
-.mobile-nav-el{
-  text-align: center;
-  margin: 25px;
-  font-size: 35px;
-  text-decoration: none;
-  justify-content: center;
+@media (min-width: 500px) {
+  .mobile {
+    display: none;
+  }
+
+  .desktop-nav {
+    display: flex;
+    justify-content: space-between;
+    margin: 0px;
+  }
+
+  .desktop-nav-el:hover {
+    background-color: red;
+  }
+  .desktop-nav-el {
+    text-decoration: none;
+    font-size: 35px;
+    width: 100%;
+    border: 5px solid red;
+    text-align: center;
+  }
+
+  #desktop-welcome-user{
+    display: block;
+    font-size: 25px;
+    text-align: right;
+    margin-right: 75px;
+  }
 }
 
-.mobile-nav-el{
-  border: 2px solid blue;
-}
 
-.header-button {
-  background-color: red;
-}
-/* #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-} */
-
-/* .nav-link {
-  padding: 50px;
-} */
 </style>

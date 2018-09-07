@@ -20,6 +20,14 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+h2 {
+  font-size: 40px;
+  text-align: center;
+}
 
+p {
+  margin: 25px;
+  font-size: 20px;
+}
 </style>

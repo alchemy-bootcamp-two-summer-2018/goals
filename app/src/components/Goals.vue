@@ -1,6 +1,5 @@
 <template>
-  <div>
-    
+  <div class="goals-container">
     <ul v-if="goals">
       <div v-for="(goal, i) in goals" :key="goal.id">
         <li>
@@ -81,7 +80,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 ul {
   list-style: none;
 }
@@ -97,5 +96,9 @@ button {
   border-radius: 10px;
   margin-left: 15px;
   margin-top: 5px;
+}
+
+.goals-container {
+  text-align: center;
 }
 </style>
