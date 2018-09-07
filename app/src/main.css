@@ -7,6 +7,22 @@ h3 {
 }
 
 p,
-input {
+input,
+button,
+label {
   font-family: 'Raleway', sans-serif;
+}
+
+button {
+  padding: 10px;
+  margin: 20px;
+}
+
+.inline-button {
+  margin: 0 20px;
+  padding: 5px 10px;
+}
+
+input {
+  margin-bottom: 20px;
 }
