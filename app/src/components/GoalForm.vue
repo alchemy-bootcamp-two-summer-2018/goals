@@ -8,7 +8,7 @@
       </FormControl>
 
       <FormControl>
-        <button type="submit">{{ label }}button button</button>
+        <button type="submit">{{ label }}</button>
         <button
           v-if="onCancel"
           @click="onCancel">
@@ -52,7 +52,6 @@ export default {
   methods: {
     handleSubmit() {
       this.error = null;
-      console.log(this.edit);
       return this.onAdd(this.edit)
         .then(() => {
           this.edit = initGoal();

@@ -1,7 +1,7 @@
 <template>
   <div class="form-control">
     <label>
-      {{ label }}
+      {{ label }}:
     </label>
     <div>
       <slot/>

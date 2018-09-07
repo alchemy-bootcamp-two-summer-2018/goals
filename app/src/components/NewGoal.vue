@@ -17,10 +17,10 @@ export default {
   },
   methods: {
     handleAdd(goal) {
-      console.log(goal, 'from newgoal');
       return addGoal(goal)
         .then(saved => {
           this.goals.push(saved);
+          this.$router.push('goals');
         });
     }
   }

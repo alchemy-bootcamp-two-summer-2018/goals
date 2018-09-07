@@ -1,11 +1,10 @@
 <template>
   <div>
-    <h1>Auth</h1>
     <button @click="type = isSignUp ? 'signIn' : 'signUp'">
       {{
         isSignUp
           ?"Already keeping track of your goals? Sign in here."
-          :"Got some goals you want to track? Click here to start."
+          :"Got some goals you want to track? Click here to sign up."
       }}
     </button>
     <pre>{{ error }}</pre>

@@ -8,14 +8,14 @@
         :completed="goal.completed"
       />
     </ul>
-    <GoalForm></GoalForm>
+    <NewGoal></NewGoal>
   </section>
 </template>
 
 <script>
 import { getGoals } from '../services/api.js';
 import Goal from './Goal.vue';
-import GoalForm from './GoalForm.vue';
+import NewGoal from './NewGoal.vue';
 
 export default {
   data() {
@@ -26,7 +26,7 @@ export default {
   },
   components: {
     Goal,
-    GoalForm
+    NewGoal
   },
   created() {
     getGoals()

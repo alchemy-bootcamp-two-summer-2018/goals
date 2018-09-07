@@ -1,7 +1,8 @@
 <template>
-  
-    <h1>home home home</h1>
-    
+  <div>
+    <h1>Welcome!</h1>
+    <p>#goals is here to help you stay on top of your... goals.</p>
+  </div>
 </template>
 
 <script>
