@@ -2,8 +2,10 @@
   <div id="app">
     <!-- <Header/> -->
     <header>
-      <h1>Goals Goals Goals!</h1>
-
+      <div class="title-and-logo">
+        <h1>Goal Tracker</h1>
+        <img src="./assets/check.png">
+      </div>
       <div class="desktop">
           <span id="desktop-welcome-user" v-if="user"><i>User: {{ user.email }}</i></span>
           <div class="desktop-nav">
@@ -76,12 +78,24 @@ export default {
 </script>
 
 <style>
+@import url('https://fonts.googleapis.com/css?family=Slabo+27px" rel="stylesheet');
 
+.title-and-logo {
+  display: flex;
+  justify-content: center;
+}
 
 h1 {
   text-align: center;
   font-size: 50px;
   margin: 0px;
+  font-family: 'Slabo 27px', serif;
+}
+
+img{ 
+  padding-top: 10px;
+  width: 50px;
+  height: 50px;
 }
 
 header {
