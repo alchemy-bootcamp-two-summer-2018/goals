@@ -42,7 +42,6 @@
 <script>
 
 import { checkForToken, signOut } from './services/api';
-// import Header from './components/Header.vue';
 
 export default {
   name: 'app',
@@ -72,7 +71,6 @@ export default {
     }
   },
   components: {
-    // Header
   }
 };
 </script>
