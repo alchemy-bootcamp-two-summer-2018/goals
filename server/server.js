@@ -21,7 +21,7 @@ app.use(express.static('public'));
 const client = require('./db-client');
 
 app.post('/api/signup', (req, res) => {
-  console.log(res);
+  console.log("hi im working", res);
   const body = req.body;
   const email = body.email;
   const password = body.password;
