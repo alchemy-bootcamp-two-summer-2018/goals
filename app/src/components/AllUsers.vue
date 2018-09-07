@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section id="compare-users">
     <h2>{{ user.email }} has the following goals:</h2>
     <li v-for="goal in user.goals" :key="goal.id">
       {{goal.name}}
@@ -20,4 +20,11 @@ export default {
 
 <style>
 
+#compare-users {
+  background-color: yellow;
+}
+
+h2 {
+  margin: 0px;
+}
 </style>

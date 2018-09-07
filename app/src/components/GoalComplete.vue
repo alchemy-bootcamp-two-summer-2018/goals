@@ -1,7 +1,7 @@
 <template>
-  <div >
+  <div id="table">
     <div id="completed">
-      <h2>Completed Goals</h2>
+      <h2>Complete</h2>
       
       <ul>
         <li v-for="goal in goals"
@@ -23,7 +23,12 @@
         </li>
       </ul>
     </div>
+
+
+   
   </div>
+
+
 
 </template>
 
@@ -35,6 +40,23 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+
+  #table {
+    display: flex;
+    justify-content: space-evenly;
+  }
+
+  #completed {
+    text-align: center;
+    border: 2px solid green;
+    padding: 0px 100px;
+  }
+
+  #incomplete {
+    text-align: center;
+    border: 2px solid green;
+    padding: 0px 100px;
+  }
 
 </style>

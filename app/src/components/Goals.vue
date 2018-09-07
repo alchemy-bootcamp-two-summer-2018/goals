@@ -1,17 +1,20 @@
 <template>
   <div class="goals-container">
-    <ul v-if="goals">
-      <div v-for="(goal, i) in goals" :key="goal.id">
-        <li>
-          {{ goal.name }}
-          <button v-if="goal.completed" @click="markAsCompleted(i)" class="complete">Done!</button>
-          <button v-else @click="markAsCompleted(i)" class="incomplete">To Do</button>
-    
-        </li>
-      </div>
-    </ul>
     <AddGoals :on-add="handleAdd"/>
-    <GoalComplete :goals="goals"/>
+    <div id="goal-completion">
+      <ul v-if="goals">
+        <h2>Name of Goal</h2>
+        <div v-for="(goal, i) in goals" :key="goal.id">
+          <li>
+            {{ goal.name }}
+            <button v-if="goal.completed" @click="markAsCompleted(i)" class="complete">Done!</button>
+            <button v-else @click="markAsCompleted(i)" class="incomplete">To Do</button>
+      
+          </li>
+        </div>
+      </ul>
+      <GoalComplete :goals="goals"/>
+    </div>
     <AllUsers v-for="user in users" 
       :key="user.id"
       :user="user"/>
@@ -100,5 +103,9 @@ button {
 
 .goals-container {
   text-align: center;
+}
+
+#goal-completion {
+  background-color: yellowgreen;
 }
 </style>

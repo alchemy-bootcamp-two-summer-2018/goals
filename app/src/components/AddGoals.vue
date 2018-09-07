@@ -2,7 +2,7 @@
     <section class="goal-form">
         <form @submit.prevent="handleSubmit">
             <label>
-                Add a goal<input type="text" name="goal" placeholder="Do it!" v-model="goal.name">
+                <span id="add-goal">Add a goal</span><input type="text" name="goal" placeholder="Do it!" v-model="goal.name">
             </label>
             <button>Add</button>
         </form>
@@ -44,8 +44,20 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+  
+  .goal-form {
+    margin: 25px;
+    border: 2px solid green;
+  }
 
+  label {
+    font-size: 25px;
+  }
 
+  #add-goal {
+    margin-right: 7px;
+
+  }
 
 </style>

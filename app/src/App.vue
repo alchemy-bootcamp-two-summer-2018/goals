@@ -9,6 +9,9 @@
           <div class="desktop-nav">
             <RouterLink class="desktop-nav-el" to="/">HOME</RouterLink>
             <RouterLink class="desktop-nav-el" v-if="user" to="/goals">GOALS</RouterLink>
+            <!-- <RouterLink class="desktop-nav-el" v-if="user" to="/add">ADD GOALS</RouterLink> -->
+            <!-- <RouterLink class="desktop-nav-el" v-if="user" to="/status">YOUR GOALS</RouterLink> -->
+            <!-- <RouterLink class="desktop-nav-el" v-if="user" to="/compare">COMPARE GOALS</RouterLink> -->
             <RouterLink class="desktop-nav-el" v-if="!user" to="/auth">SIGN IN</RouterLink>
             <a class="desktop-nav-el" v-if="user" href="/" @click.prevent="handleSignOut">SIGN OUT</a>
           </div>
@@ -20,6 +23,10 @@
           <div class="mobile-nav">        
             <RouterLink class="mobile-nav-el" to="/">HOME</RouterLink>
             <RouterLink v-if="user" class="mobile-nav-el" to="/goals">GOALS</RouterLink>
+            
+            <!-- <RouterLink v-if="user" class="mobile-nav-el" to="/add">ADD GOALS</RouterLink> -->
+            <!-- <RouterLink v-if="user" class="mobile-nav-el" to="/status">YOUR GOALS</RouterLink> -->
+            <!-- <RouterLink v-if="user" class="mobile-nav-el" to="/compare">COMPARE GOALS</RouterLink> -->
             <RouterLink v-if="!user" class="mobile-nav-el" to="/auth">SIGN IN</RouterLink>
             <a class="mobile-nav-el" v-if="user" href="/" @click.prevent="handleSignOut">SIGN OUT</a>
             <span id="mobile-welcome-user" v-if="user">User: {{ user.email }}</span>
