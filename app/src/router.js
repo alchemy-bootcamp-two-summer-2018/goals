@@ -10,10 +10,15 @@ export default new VueRouter ({
   routes: [
     { path: '/', component: Home },
     { path: '/auth', component: Auth },
-    { path: '/goals', component: Goals },
-    { path: '/add', component: AddGoals },
-    { path: '/status', component: GoalComplete },
-    { path: '/compare', component: AllUsers },
+    { 
+      path: '/goals', 
+      component: Goals,
+      children: [ 
+        { path: '/add', component: AddGoals },
+        { path: '/status', component: GoalComplete },
+        { path: '/compare', component: AllUsers }
+      ]
+    },
     { path: '*', redirect: '/' }
   ]
 });

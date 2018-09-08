@@ -71,7 +71,16 @@ export default {
       return addGoal(goal)
         .then(saved => {
           this.goals.push(saved);
-        });
+          console.log(this.users[0].id)
+          for(let i=0;i<this.users.length;i++) {
+            if(saved.user_id === this.users[i].id) {
+              this.users[i].goals.push(saved)
+              console.log(this.users)
+            }
+            
+          }
+        })
+ 
     },
     markAsCompleted(index) {
       this.goals[index].completed = !this.goals[index].completed;
