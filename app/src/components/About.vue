@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2>I am the About component</h2>
+    <h2>About</h2>
     <h3>I have cool tabs</h3>
     <Tabs>
       <Tab name="Tab 1">

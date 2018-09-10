@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2>I am the Home component</h2>
+    <h2>Home</h2>
     <p>
       Click <router-link to="/users">here</router-link> to get started!
     </p>

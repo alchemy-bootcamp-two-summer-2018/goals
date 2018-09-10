@@ -6,7 +6,7 @@ import Users from './components/Users.vue';
 import UserDetail from './components/UserDetail.vue';
 import GoalsList from './components/GoalsList.vue';
 import GoalsMap from './components/GoalsMap.vue';
-import NewGoal from './components/NewGoals.vue';
+import NewGoal from './components/NewGoal.vue';
 
 export default new VueRouter({
   routes: [
