@@ -5,6 +5,7 @@ h2 {
   font-weight: 800;
   font-size: 1.6em;
   color: rgb(83, 9, 153);
+  padding: 20px;
 }
 
 h3 {
@@ -50,7 +51,6 @@ input {
 }
 
 .content {
-  padding-bottom: 130px;
   text-align: center;
 }
 

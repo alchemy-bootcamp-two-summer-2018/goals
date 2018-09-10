@@ -100,12 +100,12 @@ export default {
   }
 
   footer {
-    height: 70px;
-    height: 15vh;
+    height: 10vh;
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: rgba(255, 217, 0, 0.596);
+    margin-top: 5vh;
   }
 
 @media (min-width: 500px) {
@@ -157,11 +157,12 @@ export default {
   }
 
   footer {
-    margin-top: -15vh;
+    height: 10vh;
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: rgba(255, 217, 0, 0.596);
+    margin-top: 5vh;
   }
 }
 

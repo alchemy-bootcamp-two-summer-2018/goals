@@ -62,6 +62,11 @@ export default {
         align-items: center;
         justify-content: center;
         color: rgb(58, 75, 172);
+        margin: auto;
+    }
+    
+    h2 {
+      padding-bottom: 30px;
     }
 
 </style>
