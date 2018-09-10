@@ -4,9 +4,6 @@ require('dotenv').config();
 const express = require('express');
 const app = express();
 
-// superagent client AJAX library for calling 3rd party APIs
-const request = require('superagent');
-
 // middleware (cors and read json body)
 const cors = require('cors');
 const morgan = require('morgan');
@@ -207,7 +204,7 @@ app.get('/api/users/:id', (req, res, next) => {
   Promise.all([userPromise, goalsPromise])
     .then(promiseValues => {
       const userResult = promiseValues[0];
-      const goalsResult = promiseValues[1];
+      //   const goalsResult = promiseValues[1];
   
       if(userResult.rows.length === 0) {
         res.sendStatus(404);
@@ -215,8 +212,8 @@ app.get('/api/users/:id', (req, res, next) => {
       }
   
       const user = userResult.rows[0];
-      const goals = goalsResult.rows;
-      user.neighborhoods = users;
+      //   const goals = goalsResult.rows;
+      user.neighborhoods = user;
   
       res.send(user);
     })
