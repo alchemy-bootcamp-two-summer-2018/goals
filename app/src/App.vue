@@ -25,9 +25,7 @@
         <h2>Please sign in to continue</h2>
         <RouterLink class="link-button" to="/auth">Log In</RouterLink>
       </div>
-
-      <RouterView :onUser="handleUser"/>
-
+        <RouterView :onUser="handleUser"/>
     </div>
     <footer>
       <p>Created at Alchemy Code Lab</p>

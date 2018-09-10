@@ -1,6 +1,6 @@
 <template>
   <div>
-      <h2 v-if="user">Our User's Goals</h2>
+      <h2 v-if="users">Our User's Goals</h2>
       <div class="goal-container">
         <div
           class="user-goals"
@@ -43,11 +43,25 @@ export default {
 <style scoped>
 
   .goal-container {
-    display: flex;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 2fr));
+      grid-gap: 20px;
   }
-
   .user-goals {
     border: 1px solid blue;
   }
+
+  .user-goals {
+        border: 2px solid rgb(196, 249, 255);
+        max-width: 300px;
+        background-color: white;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        color: rgb(58, 75, 172);
+    }
 
 </style>
