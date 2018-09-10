@@ -16,8 +16,15 @@
               <a v-if="user" class="nav-link" href="/" @click.prevent="handleSignOut">Sign Out</a>
             </div>
           </nav>
-        <span v-if="user">user: {{ user.email }}</span>
       </header>
+      <div v-if="user">
+        <h2>You are logged in as {{ user.email }}</h2>
+      </div>
+      
+      <div v-else>
+        <h2>Please sign in to continue</h2>
+        <RouterLink class="link-button" to="/auth">Log In</RouterLink>
+      </div>
 
       <RouterView :onUser="handleUser"/>
 
@@ -57,7 +64,7 @@ export default {
 <style scoped>
 
   .content {
-    min-height: 100vh;
+    min-height: 85vh;
   }
 
   .logo {
@@ -65,7 +72,7 @@ export default {
   }
 
   img {
-    width: 100vw;
+    width: 80vw;
   }
 
   nav {
@@ -88,11 +95,15 @@ export default {
     line-height: 75px;
     margin: 0;
     padding: 0;
+    text-decoration: none;
+    color: black;
+    font-family: 'Amatic SC', sans-serif;
+    font-size: 2.5em;
   }
 
   footer {
     height: 70px;
-    margin-top: -75px;
+    height: 15vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -114,6 +125,7 @@ export default {
     border-top: 4px solid rgba(255, 217, 0, 0.596);
     padding: 10px;
   }
+
   nav div {
     display: flex;
     justify-content: space-evenly;
@@ -122,7 +134,7 @@ export default {
 
   .logo {
     flex-grow: 1;
-    max-width: 20vw;
+    max-width: 25vw;
   }
 
   img {
@@ -137,12 +149,21 @@ export default {
     flex-direction: row;
     height: initial;
   }
+  
   .nav-link {
-    text-decoration: none;
-    color: black;
-    font-family: 'Amatic SC', sans-serif;
-    font-size: 40px;
     width: initial;
+  }
+  
+  h2 {
+    padding: 50px 20px 20px;
+  }
+
+  footer {
+    margin-top: -15vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255, 217, 0, 0.596);
   }
 }
 

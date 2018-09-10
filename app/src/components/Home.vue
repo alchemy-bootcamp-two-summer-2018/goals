@@ -1,18 +1,22 @@
 <template>
   <div>
-      <h2>Our User's Goals</h2>
-      <div 
-        v-if="users"
-        v-for="user in users"
-        :key="user.id">
-        <h3> {{ user.email }} </h3>
-        <p>Goals:</p>
-        <ul 
-          v-if="user.goals"
-          v-for="goal in user.goals"
-          :key="goal.id">
-            <li> {{ goal.goal }} </li>
-        </ul>
+      <h2 v-if="user">Our User's Goals</h2>
+      <div class="goal-container">
+        <div
+          class="user-goals"
+          v-if="users"
+          v-for="user in users"
+          :key="user.id">
+          <h3> {{ user.email }} </h3>
+          <div v-if="user.goals[0]">
+            <p>Goals:</p>
+            <ul
+              v-for="goal in user.goals"
+              :key="goal.id">
+              <li> {{ goal.goal }} </li>
+            </ul>
+          </div>
+        </div>
       </div>
   </div>
 </template>
@@ -36,6 +40,14 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+
+  .goal-container {
+    display: flex;
+  }
+
+  .user-goals {
+    border: 1px solid blue;
+  }
 
 </style>

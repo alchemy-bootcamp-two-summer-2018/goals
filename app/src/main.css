@@ -1,16 +1,38 @@
-@import url('https://fonts.googleapis.com/css?family=Amatic+SC|Raleway:200');
+@import url('https://fonts.googleapis.com/css?family=Amatic+SC|Merriweather:300,400,700,900|Montserrat:200,300,400,500,700,800');
 
-h1,
-h2,
-h3 {
-  font-family: 'Amatic SC', sans-serif;
+h2 {
+  font-family: 'Montserrat', serif;
+  font-weight: 800;
+  font-size: 1.6em;
+  color: rgb(83, 9, 153);
 }
 
-p,
+h3 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 1.3em;
+}
+
+p {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  font-size: 1.2em;
+}
+
+ul li {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  font-size: 1em;
+}
 input,
 button,
-label {
-  font-family: 'Raleway', sans-serif;
+label,
+span,
+li,
+.link-button {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  font-size: 1.3em;
 }
 
 button {
@@ -25,4 +47,23 @@ button {
 
 input {
   margin-bottom: 20px;
+}
+
+.content {
+  padding-bottom: 130px;
+  text-align: center;
+}
+
+h3 {
+  padding: 20px 0 5px;
+}
+
+.link-button {
+  display: inline-block;
+  text-decoration: none;
+  padding: 5px;
+  margin: 10px;
+  background-color: rgba(55, 157, 204, 0.5);
+  color: white;
+  border: 2px solid rgba(55, 157, 204);
 }
