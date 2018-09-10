@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css?family=Amatic+SC|Merriweather:300,400,700,900|Montserrat:200,300,400,500,700,800');
+
+h2 {
+  font-family: 'Montserrat', serif;
+  font-weight: 800;
+  font-size: 1.6em;
+  color: rgb(83, 9, 153);
+  padding: 20px;
+}
+
+h3 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 1.3em;
+  padding: 10px;
+  color: rgb(69, 146, 92);
+}
+
+p {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  font-size: 1.2em;
+}
+
+ul li {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  font-size: 1em;
+}
+
+input,
+button,
+label,
+span,
+li,
+.link-button {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  font-size: 1.3em;
+}
+
+button {
+  padding: 10px;
+  margin: 20px;
+}
+
+.inline-button {
+  margin: 0 20px;
+  padding: 5px 10px;
+}
+
+input {
+  margin-bottom: 20px;
+}
+
+.content {
+  text-align: center;
+}
+
+.link-button {
+  display: inline-block;
+  text-decoration: none;
+  padding: 5px;
+  margin: 10px;
+  background-color: rgba(55, 157, 204, 0.5);
+  color: white;
+  border: 2px solid rgba(55, 157, 204);
+}
