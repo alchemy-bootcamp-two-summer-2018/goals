@@ -5,7 +5,7 @@
           <nav>
             <div class="links1 nav">
               <RouterLink class="nav-link" to="/">Home</RouterLink>
-              <a class="nav-link">About</a>
+              <RouterLink class="nav-link" to="/about">About</RouterLink>
             </div>
             <div class="logo nav">
               <img src="http://inspower.co/wp-content/uploads/2015/11/do-what-you-love-cg.jpg" alt="Do what you love. Love what you do.">

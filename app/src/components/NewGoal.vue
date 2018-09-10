@@ -1,5 +1,6 @@
 <template>
   <section>
+    <h3 class="add-title">Add Goal</h3>
     <GoalForm
       label="Add"
       :onEdit="onAdd"/>
@@ -17,6 +18,10 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+
+.add-title {
+  margin: 15px;
+}
 
 </style>

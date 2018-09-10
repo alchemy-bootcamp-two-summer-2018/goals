@@ -1,17 +1,19 @@
 <template>
   <div>
-    <h3>Goals List</h3>
-    <NewGoal :onAdd="handleAdd"/>
+    <h3 class="goal-title">Goals List</h3>
     <div 
       v-if="goals" 
       v-for="(goal, i) in goals"
       :key="goal.id">
-      <p> 
+      <div class="list-container">
         <img class="check" @click="handleComplete(i)" v-if="goal.complete" src="https://dictionary.cambridge.org/images/thumb/check_noun_002_06440.jpg?version=4.0.43">
         <img class="check" @click="handleComplete(i)" v-else src="https://cdn1.iconfinder.com/data/icons/toggle/512/checkbox-off-512.png">
+      <p> 
         {{ goal.goal }}
       </p>
+      </div>
     </div>
+    <NewGoal :onAdd="handleAdd"/>
   </div>
 </template>
 
@@ -55,6 +57,16 @@ export default {
 .check {
   height: 30px;
   width: 30px;
+}
+
+.list-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.goal-title {
+  padding-bottom: 20px;
 }
 
 </style>

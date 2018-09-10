@@ -17,6 +17,8 @@ export default {
 };
 </script>
 
-<style>
-
+<style scoped>
+  .form-control h3 {
+    padding-bottom: 10px;
+  }
 </style>
