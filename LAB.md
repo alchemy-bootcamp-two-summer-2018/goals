@@ -2,11 +2,32 @@
 
 Create a fullstack vue/postgres app that allows users to track their goals.
 
+## Daily Code Kata
+
+Complete [today's Kata](https://www.codewars.com/kata/sum-of-odd-cubed-numbers)
+
 ## Build
 
-Change your build setup:
+Make sure you are using proxy feature for development:
 * Use the proxy feature from the Vue dev server to the backend express server
 * Change `services/api.js` to not use server name (`/api`, not `http://localhost:8080/api`)
+
+## Data
+
+User consists of:
+* Username
+* First Name
+* Last Name
+* Email
+* Password
+* (id)
+
+Goal
+* Title
+* Start Date
+* End Date (not NULL means completed)
+* User Id
+* (id)
 
 ## App
 
@@ -18,7 +39,6 @@ The App should offer the following routes:
     * List of users own goals
         * User can mark goal complete
     * Form to add a new goal
-* `/users` - List of all users and their goals (BONUS: with goals complete and total goals)
 
 Also include a header with Navigation links to other routes
 
@@ -30,12 +50,6 @@ You only need the routes required for the app to work:
 * `GET` `/api/me/goals` - implicit `WHERE user_id = $1` and `$1` is `req.userId`
 * `POST` `/api/me/goals` - use `req.userId`
 * `PUT` `/api/me/goals` - use `req.userId`
-* `GET` `/api/users` - return join of `users` and `goals`
-
-## Bonus
-
-* Change `GET` `/api/users` to aggregate count of goals per user and 
-* Include count of completed goals
 
 ## Rubric
 
