@@ -1,0 +1,17 @@
+[
+    {
+      "userId": 1,
+      "description": "goals are cool",
+      "completed": true
+    },
+    {
+      "userId": 2,
+      "description": "another goal",
+      "completed": true
+    },
+    {
+      "userId": 3,
+      "description": "wow a third goal",
+      "completed": false
+    }
+]
