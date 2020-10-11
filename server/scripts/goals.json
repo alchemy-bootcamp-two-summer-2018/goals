@@ -1,0 +1,32 @@
+[
+    {
+      "name": "Visit friend in Egypt",
+      "user_id": 1,
+      "complete": false
+    },
+    {
+        "name": "Graduate from college",
+        "user_id": 2,
+        "complete": true
+    },
+    {
+        "name": "Swim with Manta Rays",
+        "user_id": 1,
+        "complete": true
+    },
+    {
+        "name": "Be fluent in Spanish",
+        "user_id": 2,
+        "complete": false
+    },
+    {
+        "name": "Take a Sisters Trip to Europe",
+         "user_id": 1,
+         "complete": true
+    },
+    {
+        "name": "Open a Food Truck",
+        "user_id": 2,
+        "complete": false
+    }
+  ]
